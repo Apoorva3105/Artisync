@@ -130,7 +130,7 @@ export default function SignIn() {
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
               <div className="relative w-32 h-32 flex items-center justify-center">
-                <Image src="/kalamitra-symbol.png" alt="KalaMitra Symbol" fill className="object-contain drop-shadow-lg" />
+                <Image src="/artisync-symbol.png" alt="Artisync Symbol" fill className="object-contain drop-shadow-lg" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-[var(--text)]">{t('auth.branding.kalaMitra')}</h1>
@@ -173,7 +173,7 @@ export default function SignIn() {
             {/* Header */}
             <div className="text-center space-y-4">
               <div className="relative w-24 h-24 mx-auto">
-                <Image src="/kalamitra-symbol.png" alt="KalaMitra Symbol" fill className="object-contain" />
+                <Image src="/artisync-symbol.png" alt="Artisync Symbol" fill className="object-contain" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-[var(--text)]">
