@@ -79,7 +79,7 @@ function MarketplaceContent() {
     return [
       {
         element: isMobile ? '#navbar-brand-mobile' : 'a[href="/marketplace"]',
-        intro: '<span style="font-size:1.2em">💜 <b>Welcome to KalaMitra!</b></span><br/>This is the <b>marketplace</b> where you can explore unique products.',
+        intro: '<span style="font-size:1.2em">💜 <b>Welcome to Artisync!</b></span><br/>This is the <b>marketplace</b> where you can explore unique products.',
       },
       {
         element: 'input[aria-label]',
@@ -112,13 +112,13 @@ function MarketplaceContent() {
   // Auto-start Intro.js tour for new users (client-only)
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    // Wait for KalaMitra Navbar intro to finish before starting marketplace tour
-    const navbarIntroSeen = localStorage.getItem('hasSeenKalaMitraNavbarIntro');
-    const marketplaceIntroSeen = localStorage.getItem('hasSeenKalaMitraIntro');
+    // Wait for Artisync Navbar intro to finish before starting marketplace tour
+    const navbarIntroSeen = localStorage.getItem('hasSeenArtisyncNavbarIntro');
+    const marketplaceIntroSeen = localStorage.getItem('hasSeenArtisyncIntro');
     if (!navbarIntroSeen) {
       // Poll until navbar intro is complete
       const pollNavbarIntro = () => {
-        const navbarIntroSeenNow = localStorage.getItem('hasSeenKalaMitraNavbarIntro');
+        const navbarIntroSeenNow = localStorage.getItem('hasSeenArtisyncNavbarIntro');
         if (navbarIntroSeenNow) {
           startMarketplaceTour();
         } else {
@@ -151,9 +151,9 @@ function MarketplaceContent() {
               scrollToElement: true,
               overlayOpacity: typeof window !== 'undefined' && window.innerWidth >= 768 ? 0.3 : 0.7,
               tooltipClass: typeof window !== 'undefined' && window.innerWidth < 768
-                ? 'kalamitra-intro-theme kalamitra-intro-theme-mobile'
-                : 'kalamitra-intro-theme',
-              highlightClass: 'kalamitra-intro-highlight',
+                ? 'artisync-intro-theme artisync-intro-theme-mobile'
+                : 'artisync-intro-theme',
+              highlightClass: 'artisync-intro-highlight',
               nextLabel: 'Next →',
               prevLabel: '← Back',
               doneLabel: '✨ Done',
@@ -172,10 +172,10 @@ function MarketplaceContent() {
               }
             });
             intro.oncomplete(() => {
-              localStorage.setItem('hasSeenKalaMitraIntro', 'true');
+              localStorage.setItem('hasSeenArtisyncIntro', 'true');
             });
             intro.onexit(() => {
-              localStorage.setItem('hasSeenKalaMitraIntro', 'true');
+              localStorage.setItem('hasSeenArtisyncIntro', 'true');
             });
             intro.start();
           } else {

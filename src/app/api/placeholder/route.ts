@@ -4,7 +4,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const width = parseInt(searchParams.get('width') || '800')
   const height = parseInt(searchParams.get('height') || '450')
-  const text = searchParams.get('text') || 'KalaMitra Video'
+  const text = searchParams.get('text') || 'Artisync Video'
 
   // Create a simple SVG placeholder
   const svg = `

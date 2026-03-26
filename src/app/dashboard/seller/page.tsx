@@ -94,11 +94,11 @@ export default function SellerDashboard() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const seen = localStorage.getItem('hasSeenSellerDashboardTour');
-    const navbarIntroDone = localStorage.getItem('hasSeenKalaMitraNavbarIntro');
+    const navbarIntroDone = localStorage.getItem('hasSeenArtisyncNavbarIntro');
     // Wait for navbar intro to finish before starting dashboard tour
     if (!seen && !window.__sellerDashboardTourStarted) {
       const tryStartDashboardTour = () => {
-        const navbarIntroDoneNow = localStorage.getItem('hasSeenKalaMitraNavbarIntro');
+        const navbarIntroDoneNow = localStorage.getItem('hasSeenArtisyncNavbarIntro');
         if (navbarIntroDoneNow === 'true') {
           window.__sellerDashboardTourStarted = true;
           Promise.all([
@@ -119,8 +119,8 @@ export default function SellerDashboard() {
                   exitOnEsc: false,
                   scrollToElement: true,
                   overlayOpacity: 0.3,
-                  tooltipClass: 'kalamitra-intro-theme',
-                  highlightClass: 'kalamitra-intro-highlight',
+                  tooltipClass: 'artisync-intro-theme',
+                  highlightClass: 'artisync-intro-highlight',
                   nextLabel: 'Next →',
                   prevLabel: '← Back',
                   doneLabel: '✨ Done',

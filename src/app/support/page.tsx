@@ -55,7 +55,7 @@ export default function SupportPage() {
           <div className="bg-[var(--bg-2)]/90 backdrop-blur-sm p-6 rounded-2xl border border-[var(--heritage-gold)]/20 shadow-soft">
             <h2 className="text-xl font-serif font-bold text-[var(--heritage-brown)] mb-3">{t('support.directSupportTitle')}</h2>
             <ul className="space-y-2 text-[var(--muted)]">
-              <li><strong className="text-[var(--text)]">{t('support.emailLabel')}:</strong> <a href="mailto:talkto.kalamitra@gmail.com" className="hover:text-[var(--heritage-red)] text-[var(--heritage-gold)] transition-colors">talkto.kalamitra@gmail.com</a></li>
+              <li><strong className="text-[var(--text)]">{t('support.emailLabel')}:</strong> <a href="mailto:contact@artisync.com" className="hover:text-[var(--heritage-red)] text-[var(--heritage-gold)] transition-colors">contact@artisync.com</a></li>
               <li><strong className="text-[var(--text)]">{t('support.phoneLabel')}:</strong> <a href="tel:+919616928911" className="hover:text-[var(--heritage-red)] text-[var(--heritage-gold)] transition-colors">+91 9616928911</a></li>
               <li><strong className="text-[var(--text)]">{t('support.responseTimeLabel')}:</strong> {t('support.responseTimeVal')}</li>
             </ul>
