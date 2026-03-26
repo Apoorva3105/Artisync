@@ -154,7 +154,7 @@ export default function AboutPage() {
           <section className="bg-gradient-to-r from-[var(--bg-1)] to-[var(--bg-2)] rounded-2xl p-6 md:p-8 border border-[var(--border)]">
             <h2 className="text-2xl font-serif font-semibold text-[var(--heritage-brown)] mb-4">{t('aboutUs.contactLegalTitle')}</h2>
             <div className="space-y-2 text-[var(--muted)]">
-              <p>{t('aboutUs.contactBody').split(': ')[0]}: <a href="mailto:talkto.kalamitra@gmail.com" className="text-[var(--heritage-red)] font-medium hover:underline">talkto.kalamitra@gmail.com</a></p>
+              <p>{t('aboutUs.contactBody').split(': ')[0]}: <a href="mailto:contact@artisync.com" className="text-[var(--heritage-red)] font-medium hover:underline">contact@artisync.com</a></p>
               <div className="pt-4 border-t border-[var(--heritage-gold)]/20 mt-4">
                 <p><strong>{t('aboutUs.founderLabel')}:</strong> {t('aboutUs.founderName')}</p>
                 <p><strong>{t('aboutUs.roleLabel')}:</strong> {t('aboutUs.roleName')}</p>

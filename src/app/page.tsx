@@ -16,23 +16,23 @@ function FaqCustomAccordion() {
 
   const faqData = [
     {
-      question: t('home.faq.q1', "What is KalaMitra?"),
-      answer: t('home.faq.a1', "KalaMitra is an AI-powered marketplace connecting talented artisans with buyers worldwide...")
+      question: t('home.faq.q1', "What is Artisync?"),
+      answer: t('home.faq.a1', "Artisync is an AI-powered marketplace connecting talented artisans with buyers worldwide...")
     },
     {
-      question: t('home.faq.q2', "How do I buy products on KalaMitra?"),
+      question: t('home.faq.q2', "How do I buy products on Artisync?"),
       answer: t('home.faq.a2', "Simply browse our marketplace, use voice or text search...")
     },
     {
-      question: t('home.faq.q3', "How can artisans sell on KalaMitra?"),
+      question: t('home.faq.q3', "How can artisans sell on Artisync?"),
       answer: t('home.faq.a3', "Sign up as a seller, create your personalized virtual stall...")
     },
     {
-      question: t('home.faq.q4', "What makes KalaMitra different from other marketplaces?"),
-      answer: t('home.faq.a4', "KalaMitra uniquely combines tradition with technology...")
+      question: t('home.faq.q4', "What makes Artisync different from other marketplaces?"),
+      answer: t('home.faq.a4', "Artisync uniquely combines tradition with technology...")
     },
     {
-      question: t('home.faq.q5', "Is KalaMitra free to use?"),
+      question: t('home.faq.q5', "Is Artisync free to use?"),
       answer: t('home.faq.a5', "Yes! Creating an account, browsing products...")
     }
   ];
@@ -216,7 +216,7 @@ export default function Home() {
               <div className="bg-white rounded-xl md:rounded-3xl p-1 md:p-2">
                 <VideoPlayer
                   src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  poster="/api/placeholder?width=800&height=450&text=KalaMitra+Craftsmanship"
+                  poster="/api/placeholder?width=800&height=450&text=Artisync+Craftsmanship"
                   title={t('home.videoPlayerTitle')}
                   description={t('home.videoPlayerDesc')}
                   className="aspect-video rounded-lg md:rounded-2xl overflow-hidden shadow-2xl"
@@ -421,7 +421,7 @@ export default function Home() {
                     width="100%"
                     height="100%"
                     src="https://www.youtube.com/embed/Ge7mo6KzMTo?autoplay=1&mute=1&loop=1&playlist=Ge7mo6KzMTo&controls=0&modestbranding=1&rel=0&showinfo=0&fs=0&disablekb=1"
-                    title="KalaMitra 3D Bazaar Preview"
+                    title="Artisync 3D Bazaar Preview"
                     allow="autoplay; encrypted-media"
                     allowFullScreen={false}
                     className="aspect-square rounded-2xl overflow-hidden"

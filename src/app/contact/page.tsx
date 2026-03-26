@@ -33,16 +33,10 @@ export default function ContactPage() {
                     <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-gold)] to-[var(--heritage-red)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">✉️</span>
                     <div>
                       <p className="text-xs uppercase tracking-wider font-semibold opacity-70 text-[var(--heritage-brown)]">{t('contact.emailLabel')}</p>
-                      <a href="mailto:talkto.kalamitra@gmail.com" className="text-[var(--text)] font-medium hover:text-[var(--heritage-red)] transition-colors text-lg">talkto.kalamitra@gmail.com</a>
+                      <a href="mailto:contact@artisync.com" className="text-[var(--text)] font-medium hover:text-[var(--heritage-red)] transition-colors text-lg">contact@artisync.com</a>
                     </div>
                   </li>
-                  <li className="flex items-center gap-4 group">
-                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-green)] to-[var(--heritage-blue)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">✉️</span>
-                    <div>
-                      <p className="text-xs uppercase tracking-wider font-semibold opacity-70 text-[var(--heritage-brown)]">{t('contact.secondaryEmailLabel')}</p>
-                      <a href="mailto:thinktech17@gmail.com" className="text-[var(--text)] font-medium hover:text-[var(--heritage-blue)] transition-colors text-lg">thinktech17@gmail.com</a>
-                    </div>
-                  </li>
+                  
                   <li className="flex items-center gap-4 group">
                     <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-red)] to-[var(--heritage-accent)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">📞</span>
                     <div>
