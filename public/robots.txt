@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://kalamitra.store
+Host: https://artisync.vercel.app
 
 # Sitemaps
-Sitemap: https://kalamitra.store/sitemap.xml
+Sitemap: https://artisync.vercel.app/sitemap.xml
