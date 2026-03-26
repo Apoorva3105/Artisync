@@ -12,7 +12,7 @@ export interface CartItem {
   }
 }
 
-const CART_STORAGE_KEY = 'kalamitra_anonymous_cart'
+const CART_STORAGE_KEY = 'artisync_anonymous_cart'
 
 /**
  * Get cart items from localStorage

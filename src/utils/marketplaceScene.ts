@@ -944,7 +944,7 @@ export async function initMarketplaceScene(
   // and a circular CSS mask (border-radius) works reliably across devices and is
   // lightweight for a small viewport.
   const minimapOverlay = document.createElement('canvas');
-  minimapOverlay.className = 'kalamitra-minimap-overlay';
+  minimapOverlay.className = 'artisync-minimap-overlay';
   // Ensure the parent can contain an absolutely positioned overlay
   const parentEl = canvas.parentElement as HTMLElement | null;
   if (parentEl) {
