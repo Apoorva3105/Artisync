@@ -16,14 +16,14 @@
   <p style="font-size: 1.1em; color: #dc2626; font-weight: 600; margin-top: 0.5em;">Preserving Tradition, Empowering Artisans ✨</p>
 </div>
 <div align="center">
-  <b>🌐</b> <a href="https://www.kalamitra.store/" target="_blank">https://www.kalamitra.store/</a>
+  <b>🌐</b> <a href="https://artisync.vercel.app/" target="_blank">https://artisync.vercel.app/</a>
 </div>
 
 <br>
 
 
 
-🌟 <b>KalaMitra</b> is a celebration of heritage and creativity, uniting artisans and art lovers in a vibrant, AI-powered marketplace.<br> <b>Inspired by tradition, built with ❤️ for the artisan spirit.</b>
+🌟 <b>Artisync</b> is a celebration of heritage and creativity, uniting artisans and art lovers in a vibrant, AI-powered marketplace.<br> <b>Inspired by tradition, built with ❤️ for the artisan spirit.</b>
 
 ---
 
@@ -120,12 +120,12 @@
 ## 📁 Project Structure
 
 ```text
-KalaMitra/
+Artisync/
 │
 ├── public/
 │   ├── pdf.worker.min.js
-│   ├── kalamitra-logo.png
-│   ├── kalamitra-symbol.png
+│   ├── artisync-logo.png
+│   ├── artisync-symbol.png
 │   ├── gold&jwellery.jpg
 │   ├── pottery.jpg
 │   ├── saree.jpg
@@ -414,7 +414,7 @@ KalaMitra/
 
 ## 🤖 AI Features
 
-KalaMitra is powered by advanced AI capabilities: <img width="208" height="202" align='left' alt="Screenshot 2025-09-20 013733" src="https://github.com/user-attachments/assets/bd81c756-6f71-4361-abc5-e5312058c665" />
+Artisync is powered by advanced AI capabilities: <img width="208" height="202" align='left' alt="Screenshot 2025-09-20 013733" src="https://github.com/user-attachments/assets/bd81c756-6f71-4361-abc5-e5312058c665" />
 
 
 - <b>AI Photo Enhancement</b>: Instantly improve product images
@@ -440,7 +440,7 @@ All AI features are fully implemented and ready to use!
   <img src="https://img.shields.io/badge/Accent-Amber--500-f59e0b?style=flat-square"/>
 </p>
 
-KalaMitra uses a warm, earthy palette and mandala-inspired backgrounds for a unique, culturally-rich experience. All styles are managed via TailwindCSS and custom global styles.
+Artisync uses a warm, earthy palette and mandala-inspired backgrounds for a unique, culturally-rich experience. All styles are managed via TailwindCSS and custom global styles.
 
 
 ---
@@ -448,7 +448,7 @@ KalaMitra uses a warm, earthy palette and mandala-inspired backgrounds for a uni
 ## 🚀 Deployment
 
 ### 🚀 Deployment
-KalaMitra is ready for deployment on Vercel, Netlify, Railway, or any platform supporting Next.js.
+Artisync is ready for deployment on Vercel, Netlify, Railway, or any platform supporting Next.js.
 
 
 ---
