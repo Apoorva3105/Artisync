@@ -12,7 +12,7 @@ import AIChatConditional from '@/components/AIChatConditional'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'KalaMitra',
+  title: 'Artisync',
   description: 'Empowering Indian Artisans with AI',
 }
 
@@ -27,25 +27,25 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>KalaMitra | Empowering Indian Artisans with AI</title>
-        <meta name="description" content="KalaMitra: Empowering Indian Artisans with AI. Discover, shop, and support authentic Indian art and craft. Join the KalaMitra community!" />
-        <meta name="keywords" content="KalaMitra, Indian Artisans, AI, Handicrafts, Marketplace, Indian Art, Buy Art, Support Artisans, kalamitra.store, Culture, Heritage,3D Bazaar" />
+        <title>Artisync | Empowering Indian Artisans with AI</title>
+        <meta name="description" content="Artisync: Empowering Indian Artisans with AI. Discover, shop, and support authentic Indian art and craft. Join the Artisync community!" />
+        <meta name="keywords" content="Artisync, Indian Artisans, AI, Handicrafts, Marketplace, Indian Art, Buy Art, Support Artisans, artisync.vercel.app, Culture, Heritage,3D Bazaar" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="KalaMitra | Empowering Indian Artisans with AI" />
-        <meta property="og:description" content="KalaMitra: Empowering Indian Artisans with AI. Discover, shop, and support authentic Indian art and craft." />
-        <meta property="og:url" content="https://kalamitra.store" />
+        <meta property="og:title" content="Artisync | Empowering Indian Artisans with AI" />
+        <meta property="og:description" content="Artisync: Empowering Indian Artisans with AI. Discover, shop, and support authentic Indian art and craft." />
+        <meta property="og:url" content="https://artisync.vercel.app" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://kalamitra.store/kalamitra-logo.png" />
+        <meta property="og:image" content="https://artisync.vercel.app/artisync-logo.png" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="KalaMitra" />
+        <meta property="og:site_name" content="Artisync" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="KalaMitra | Empowering Indian Artisans with AI" />
-        <meta name="twitter:description" content="KalaMitra: Empowering Indian Artisans with AI. Discover, shop, and support authentic Indian art and craft." />
-        <meta name="twitter:image" content="https://kalamitra.store/kalamitra-logo.png" />
-        <meta name="author" content="Apoorv" />
-        <meta property="profile:username" content="-apoorv-" />
-        <meta property="profile:profile_link" content="https://www.linkedin.com/in/-apoorv-/" />
-        <link rel="canonical" href="https://kalamitra.store" />
+        <meta name="twitter:title" content="Artisync | Empowering Indian Artisans with AI" />
+        <meta name="twitter:description" content="Artisync: Empowering Indian Artisans with AI. Discover, shop, and support authentic Indian art and craft." />
+        <meta name="twitter:image" content="https://artisync.vercel.app/artisync-logo.png" />
+        <meta name="author" content="Artisync Team" />
+        <meta property="profile:username" content="artisync" />
+        <meta property="profile:profile_link" content="https://www.artisync.com" />
+        <link rel="canonical" href="https://artisync.vercel.app" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <AuthProvider>
