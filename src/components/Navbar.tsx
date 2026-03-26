@@ -23,7 +23,7 @@ export default function Navbar() {
       return [
         {
           element: '#navbar-brand-mobile',
-          intro: '<span style="font-size:1.2em">💜 <b>Welcome to KalaMitra!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
+          intro: '<span style="font-size:1.2em">💜 <b>Welcome to Artisync!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
         },
         {
           element: '#navbar-mobile-theme-toggle',
@@ -50,7 +50,7 @@ export default function Navbar() {
       return [
         {
           element: '.heritage-title',
-          intro: '<span style="font-size:1.2em">💜 <b>Welcome to KalaMitra!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
+          intro: '<span style="font-size:1.2em">💜 <b>Welcome to Artisync!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
         },
         {
           element: 'a[href="/marketplace"]',
@@ -91,7 +91,7 @@ export default function Navbar() {
   // Auto-start Navbar Intro.js tour for new users (client-only)
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const seen = localStorage.getItem('hasSeenKalaMitraNavbarIntro');
+    const seen = localStorage.getItem('hasSeenArtisyncNavbarIntro');
     if (!seen) {
       Promise.all([
         import('intro.js'),
@@ -110,18 +110,18 @@ export default function Navbar() {
               exitOnEsc: false,
               scrollToElement: true,
               overlayOpacity: 0.7,
-              tooltipClass: 'kalamitra-intro-theme kalamitra-intro-theme-mobile',
-              highlightClass: 'kalamitra-intro-highlight',
+              tooltipClass: 'artisync-intro-theme artisync-intro-theme-mobile',
+              highlightClass: 'artisync-intro-highlight',
               nextLabel: 'Next →',
               prevLabel: '← Back',
               doneLabel: '✨ Done',
               skipLabel: 'Skip',
             })
               .oncomplete(() => {
-                localStorage.setItem('hasSeenKalaMitraNavbarIntro', 'true');
+                localStorage.setItem('hasSeenArtisyncNavbarIntro', 'true');
               })
               .onexit(() => {
-                localStorage.setItem('hasSeenKalaMitraNavbarIntro', 'true');
+                localStorage.setItem('hasSeenArtisyncNavbarIntro', 'true');
               })
               .start();
           } else {
@@ -521,9 +521,9 @@ export default function Navbar() {
             {/* Logo placeholder */}
             <div className="flex items-center space-x-4 group">
               <div className="relative w-14 h-14 flex items-center justify-center">
-                <Image src="/kalamitra-symbol.png" alt="KalaMitra Symbol" width={56} height={56} className="object-contain" />
+                <Image src="/artisync-symbol.png" alt="Artisync Symbol" width={56} height={56} className="object-contain" />
               </div>
-              <span className="text-3xl font-bold heritage-title">KalaMitra</span>
+              <span className="text-3xl font-bold heritage-title">Artisync</span>
             </div>
             {/* navbar placeholder */}
             <div className="hidden md:flex items-center space-x-10">
@@ -592,12 +592,12 @@ export default function Navbar() {
           <div className="flex items-center space-x-4 group">
             <Link href="/" className="flex items-center space-x-4 group">
               <div className="relative w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
-                <Image src="/kalamitra-symbol.png" alt="KalaMitra Symbol" width={56} height={56} className="object-contain drop-shadow-md" priority />
+                <Image src="/artisync-symbol.png" alt="Artisync Symbol" width={56} height={56} className="object-contain drop-shadow-md" priority />
               </div>
               <span className="text-3xl font-bold heritage-title hidden md:inline" key={`brand-${currentLanguage}`}>{t('brand.name')}</span>
-              {/* Mobile: Show "KM" when signed in, "KalaMitra" when not */}
+              {/* Mobile: Show "AS" when signed in, "Artisync" when not */}
               <span id="navbar-brand-mobile" className="text-2xl font-bold heritage-title md:hidden" key={`brand-short-${currentLanguage}`}>
-                {user ? 'KM' : 'KalaMitra'}
+                {user ? 'AS' : 'Artisync'}
               </span>
             </Link>
           </div>

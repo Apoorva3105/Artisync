@@ -13,7 +13,7 @@ interface VideoPlayerProps {
 export default function VideoPlayer({ 
   src, 
   poster, 
-  title = "KalaMitra Craftsmanship", 
+  title = "Artisync Craftsmanship", 
   description = "Experience the beauty of traditional craftsmanship",
   className = ""
 }: VideoPlayerProps) {

@@ -88,7 +88,7 @@ export default function Leaderboard({ open = true, onClose, embedMode = false }:
             {t('leaderboard.title', { defaultValue: 'Leaderboard' })}
           </h3>
           <p className="text-[var(--muted)]">
-            {t('leaderboard.desc', { defaultValue: 'Top contributors to the KalaMitra community' })}
+            {t('leaderboard.desc', { defaultValue: 'Top contributors to the Artisync community' })}
           </p>
         </div>
 

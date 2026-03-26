@@ -444,7 +444,7 @@ export default function AIProductForm({
             if (ctx) {
               ctx.drawImage(img, 0, 0);
               // Add diagonal watermark
-              const watermarkText = 'KalaMitra';
+              const watermarkText = 'Artisync';
               ctx.save();
               ctx.translate(canvas.width / 2, canvas.height / 2);
               ctx.rotate(-Math.atan(canvas.height / canvas.width));
@@ -965,7 +965,7 @@ export default function AIProductForm({
                         }
                         await page.render({ canvasContext: context, viewport, canvas }).promise;
                           // Add a single diagonal watermark across the center
-                          const watermarkText = 'KalaMitra';
+                          const watermarkText = 'Artisync';
                           context.save();
                           context.translate(canvas.width / 2, canvas.height / 2);
                           context.rotate(-Math.atan(canvas.height / canvas.width));
@@ -1010,7 +1010,7 @@ export default function AIProductForm({
                         if (ctx) {
                           ctx.drawImage(img, 0, 0);
                           // Add diagonal watermark
-                          const watermarkText = 'KalaMitra';
+                          const watermarkText = 'Artisync';
                           ctx.save();
                           ctx.translate(canvas.width / 2, canvas.height / 2);
                           ctx.rotate(-Math.atan(canvas.height / canvas.width));
