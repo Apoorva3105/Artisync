@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import { supabase } from '../../../lib/supabase';
 import { Database } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
-import { Trophy, Users, Send } from 'lucide-react';
+import { Trophy, Users, PaperPlaneRight } from '@phosphor-icons/react';
 
 type Profile = Database['public']['Tables']['profiles']['Row']
 
@@ -165,7 +165,7 @@ export default function PublicProfilePage() {
           title={`Message ${profile.name || 'User'}`}
         >
           <span className="flex items-center gap-2">
-            <Send className="w-5 h-5" />
+            <PaperPlaneRight className="w-5 h-5" />
             <span className="text-xs font-semibold">Message</span>
           </span>
         </button>

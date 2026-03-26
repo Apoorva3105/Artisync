@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Home, Search } from 'lucide-react'
+import { House as Home, MagnifyingGlass as Search } from '@phosphor-icons/react'
 import HideNavbar from '@/components/HideNavbar'
 import Image from 'next/image'
 

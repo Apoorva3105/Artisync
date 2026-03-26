@@ -2,20 +2,8 @@
 
 import { useState, useRef } from 'react'
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
-import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Camera, 
-  Sparkles, 
-  DollarSign, 
-  Tag, 
-  Loader2, 
-  CheckCircle, 
-  AlertCircle,
-  Upload,
-  X,
-  Video,
-  Mic
-} from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
+import { Camera, Sparkle as Sparkles, CurrencyDollar as DollarSign, Tag, CircleNotch as Loader2, CheckCircle, WarningCircle as AlertCircle, Upload, X, Video, Microphone as Mic, Palette, BookOpen, UploadSimple, Lightbulb } from '@phosphor-icons/react'
 import AIService, { AIAnalysisResult } from '@/lib/ai-service'
 import { supabase } from '@/lib/supabase'
 import { useTranslation } from 'react-i18next'
@@ -770,7 +758,7 @@ export default function AIProductForm({
                       className="p-2 bg-white border rounded-lg hover:bg-gray-50 text-red-500"
                       title="Remove step"
                     >
-                      ✖
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -855,7 +843,7 @@ export default function AIProductForm({
                 className="flex flex-col items-center justify-center px-6 py-5 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-500 text-white font-bold shadow hover:scale-105 transition-all duration-200"
                 onClick={() => window.open('https://kolamai.vercel.app/creation', '_blank')}
               >
-                <span className="text-3xl mb-2">🎨</span>
+                <Palette className="w-8 h-8 mb-2 mx-auto text-orange-500" />
                 {t('ai.virtualForm.virtual.kolamAI', { defaultValue: 'Kolam AI' })}
                 <span className="text-xs mt-1">
                   {t('ai.virtualForm.virtual.kolamAIDesc', { defaultValue: 'Create Kolam/Rangoli designs with AI' })}
@@ -865,7 +853,7 @@ export default function AIProductForm({
                 className="flex flex-col items-center justify-center px-6 py-5 rounded-xl bg-gradient-to-br from-orange-400 to-pink-400 text-white font-bold shadow hover:scale-105 transition-all duration-200"
                 onClick={() => setStep(2)}
               >
-                <span className="text-3xl mb-2">📖</span>
+                <BookOpen className="w-8 h-8 mb-2 mx-auto text-blue-500" />
                 {t('ai.virtualForm.virtual.tutorialRecipe', { defaultValue: 'Tutorial/Recipe' })}
                 <span className="text-xs mt-1">
                   {t('ai.virtualForm.virtual.tutorialRecipeDesc', { defaultValue: 'Create a tutorial or recipe (mic input, AI, PDF)' })}
@@ -875,7 +863,7 @@ export default function AIProductForm({
                 className="flex flex-col items-center justify-center px-6 py-5 rounded-xl bg-gradient-to-br from-gray-200 to-gray-400 text-gray-900 font-bold shadow hover:scale-105 transition-all duration-200"
                 onClick={() => setStep(1)}
               >
-                <span className="text-3xl mb-2">⬆️</span>
+                <UploadSimple className="w-8 h-8 mb-2 mx-auto text-emerald-500" />
                 {t('ai.virtualForm.virtual.directUpload', { defaultValue: 'Direct Upload' })}
                 <span className="text-xs mt-1">
                   {t('ai.virtualForm.virtual.directUploadDesc', { defaultValue: 'Upload an existing product (full form)' })}
@@ -1468,7 +1456,7 @@ export default function AIProductForm({
 
         {/* AI Tips */}
         <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-          <h4 className="text-sm font-medium text-amber-800 mb-2">💡 {t('ai.tips.title')}</h4>
+          <h4 className="text-sm font-medium text-amber-800 mb-2 flex items-center"><Lightbulb className="w-4 h-4 mr-2" /> {t('ai.tips.title')}</h4>
           <ul className="text-xs text-amber-700 space-y-1">
             <li>• {t('ai.tips.items.uploadClearImage')}</li>
             <li>• {t('ai.tips.items.avoidUnderpricing')}</li>

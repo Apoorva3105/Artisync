@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import { Shapes } from 'lucide-react';
+import { Shapes } from '@phosphor-icons/react';
 import MarketplaceStalls3D, { SellerGroup } from './MarketplaceStalls3D';
 import { Product } from '../types/product';
 
@@ -85,5 +85,4 @@ export default function Market3DButton({ products, onAddToCart, onViewDetails }:
     </>
   );
 }
-
 

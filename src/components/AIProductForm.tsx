@@ -1,20 +1,20 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { 
   Camera, 
-  Sparkles, 
-  DollarSign, 
+  Sparkle as Sparkles, 
+  CurrencyDollar as DollarSign, 
   Tag, 
-  Loader2, 
+  CircleNotch as Loader2, 
   CheckCircle, 
-  AlertCircle,
+  WarningCircle as AlertCircle,
   Upload,
   X,
   Video,
-  Mic
-} from 'lucide-react'
+  Microphone as Mic
+} from '@phosphor-icons/react'
 import AIService, { AIAnalysisResult } from '@/lib/ai-service'
 import { supabase } from '@/lib/supabase'
 import { useTranslation } from 'react-i18next'

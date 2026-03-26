@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/components/LanguageProvider';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
-import { motion } from 'framer-motion';
-import { Send, Mic } from 'lucide-react';
+import { motion } from 'motion/react';
+import { PaperPlaneRight as Send, Microphone as Mic } from '@phosphor-icons/react';
 
 export type ChatThread = {
   id: string;

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
-import { Gift, User, Heart } from 'lucide-react';
+import { Gift, User, Heart, Users } from '@phosphor-icons/react';
 import { useTranslation } from 'next-i18next';
 export default function GiftsPage() {
   const { t } = useTranslation();
@@ -313,7 +313,7 @@ export default function GiftsPage() {
               className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl font-semibold shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all flex items-center gap-2"
               onClick={() => window.location.href = '/marketplace'}
             >
-              <span className="text-xl">👥</span>
+              <Users className="w-5 h-5" />
               {t('gifts.startGroupGift')}
             </button>
           </div>
@@ -353,7 +353,7 @@ export default function GiftsPage() {
                   {/* Confetti for new (unviewed) gifts */}
                   {confettiGiftId === gift.id && (
                     <div className="absolute z-10 inset-0 pointer-events-none flex justify-center items-center">
-                      <span className="text-4xl animate-bounce">🎉🎊🎁</span>
+                      <Gift className="w-10 h-10 text-pink-500 animate-bounce" />
                     </div>
                   )}
                   <div className="flex items-center gap-4">

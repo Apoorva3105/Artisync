@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import { supabase, Database } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Check, Trash2, Bell } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
+import { Check, Trash, Bell } from '@phosphor-icons/react'
 
 type NotificationRow = Database['public']['Tables']['notifications']['Row']
 
@@ -234,7 +234,7 @@ export default function NotificationsList() {
                   }}
                   title="Delete notification"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash className="w-4 h-4" />
                 </button>
               </div>
             </div>

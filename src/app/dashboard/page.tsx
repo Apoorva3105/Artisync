@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { Suspense } from 'react'
 
 export default function Dashboard() {

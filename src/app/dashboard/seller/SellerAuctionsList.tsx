@@ -1,3 +1,4 @@
+import { Package, CurrencyInr, Clock, Flag, Trash } from '@phosphor-icons/react'
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
@@ -78,7 +79,7 @@ export default function SellerAuctionsList({ sellerId }: { sellerId: string }) {
   
   if (auctions.length === 0) return (
     <div className="text-center py-12">
-      <div className="text-6xl mb-4">📦</div>
+      <Package className="w-16 h-16 mb-4 text-[var(--muted)]" />
       <p className="text-base sm:text-lg font-semibold text-[var(--text)] mb-2">No Active Auctions</p>
       <p className="text-sm text-[var(--muted)]">{t('seller.noProducts')}</p>
     </div>
@@ -103,7 +104,7 @@ export default function SellerAuctionsList({ sellerId }: { sellerId: string }) {
                   ? 'bg-red-500 text-white'
                   : 'bg-gray-500 text-white'
               }`}>
-                {a.status === 'running' ? '🟢 Active' : a.status === 'scheduled' ? '🔵 Scheduled' : a.status === 'cancelled' ? '🔴 Cancelled' : '⚫ Completed'}
+                {a.status === 'running' ? 'Active' : a.status === 'scheduled' ? 'Scheduled' : a.status === 'cancelled' ? 'Cancelled' : 'Completed'}
               </span>
             </div>
 
@@ -117,7 +118,7 @@ export default function SellerAuctionsList({ sellerId }: { sellerId: string }) {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="text-lg">💰</span>
+                      <CurrencyInr className="w-5 h-5" />
                       <div>
                         <p className="text-xs text-gray-600 dark:text-[var(--muted)] font-medium">Starting Price</p>
                         <p className="text-base font-bold text-amber-600 dark:text-amber-400">₹{a.starting_price || 'N/A'}</p>
@@ -126,7 +127,7 @@ export default function SellerAuctionsList({ sellerId }: { sellerId: string }) {
                     
                     {a.starts_at && (
                       <div className="flex items-center gap-2 text-sm">
-                        <span className="text-lg">🕐</span>
+                        <Clock className="w-5 h-5" />
                         <div>
                           <p className="text-xs text-gray-600 dark:text-[var(--muted)] font-medium">Starts</p>
                           <p className="text-xs font-semibold text-gray-900 dark:text-[var(--text)]">{new Date(a.starts_at).toLocaleDateString()}</p>
@@ -155,7 +156,7 @@ export default function SellerAuctionsList({ sellerId }: { sellerId: string }) {
                       onClick={() => endAuction(a.id)} 
                       className="flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
                     >
-                      <span>🏁</span>
+                      <Flag className="w-4 h-4" />
                       <span>End Auction</span>
                     </button>
                   )}
@@ -163,7 +164,7 @@ export default function SellerAuctionsList({ sellerId }: { sellerId: string }) {
                     onClick={() => deleteAuction(a.id)} 
                     className="flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
                   >
-                    <span>🗑️</span>
+                    <Trash className="w-4 h-4" />
                     <span>Delete</span>
                   </button>
                 </div>

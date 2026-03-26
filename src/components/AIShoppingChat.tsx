@@ -2,8 +2,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Loader2, RefreshCw, Trash2, Mic, Sparkles } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
+import { ChatCircle as MessageCircle, X, PaperPlaneRight as Send, CircleNotch as Loader2, ArrowClockwise as RefreshCw, Trash, Microphone as Mic, Sparkle as Sparkles, Warning } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from './LanguageProvider'
@@ -246,7 +246,7 @@ export default function AIShoppingChat() {
     }
 
     const confirmed = window.confirm(
-      '🗑️ Delete this conversation permanently?\n\nThis will remove all messages from your history and cannot be undone.'
+      'Delete this conversation permanently?\n\nThis will remove all messages from your history and cannot be undone.'
     )
     
     if (!confirmed) return
@@ -437,7 +437,7 @@ export default function AIShoppingChat() {
                     className="p-2 hover:bg-red-600/30 rounded-lg transition-colors"
                     title="Delete conversation permanently from database"
                   >
-                    <Trash2 className="w-5 h-5" />
+              <Trash className="w-5 h-5" />
                   </button>
                 )}
               </div>
@@ -447,7 +447,7 @@ export default function AIShoppingChat() {
             {!user && (
               <div className="bg-yellow-50 dark:bg-yellow-900/20 border-b border-yellow-200 dark:border-yellow-800 px-4 py-2 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-yellow-800 dark:text-yellow-200">
-                  <span>⚠️</span>
+                  <Warning className="w-5 h-5 text-amber-500" />
                   <span>{t('aiChat.notSavedBanner')}</span>
                 </div>
                 <Link 

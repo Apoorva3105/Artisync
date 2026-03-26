@@ -4,404 +4,199 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
-import { useTheme } from '@/components/ThemeProvider'
-import { Eye, EyeOff, AlertCircle, ArrowRight, Sparkles, Shield, Users, Palette } from 'lucide-react'
+import { Sparkle, Shield, Users, Palette } from '@phosphor-icons/react'
 import { useTranslation } from 'react-i18next'
-import Image from 'next/image'
+import ArtisyncLogo from '@/components/ArtisyncLogo'
 
 export default function SignIn() {
   const { t } = useTranslation()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
-  const [microsoftLoading, setMicrosoftLoading] = useState(false)
   const [error, setError] = useState('')
   const [showRoleModal, setShowRoleModal] = useState(false)
-  const [selectedProvider, setSelectedProvider] = useState<'google' | 'microsoft' | null>(null)
 
-  const { signIn, signInWithGoogle, signInWithMicrosoft, user, profile } = useAuth()
+  const { signInWithGoogle, user, profile } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
     if (user && profile) {
-      if (profile.role === 'seller') {
-        router.push('/dashboard')
-      } else {
-        router.push('/marketplace')
-      }
+      router.push(profile.role === 'seller' ? '/dashboard' : '/marketplace')
     }
   }, [user, profile, router])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-
-    // Basic validation
-    if (!email.trim() || !password.trim()) {
-      setError(t('auth.errors.missingEmailPassword'))
-      setLoading(false)
-      return
-    }
-
-    try {
-      await signIn(email, password)
-      // User will be redirected based on their role
-    } catch (error: unknown) {
-      console.error('Signin error details:', error)
-
-      // Handle different types of errors
-      if (error instanceof Error) {
-        setError(error.message)
-
-        // Log additional error details for debugging
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Error name:', error.name)
-          console.log('Error message:', error.message)
-          console.log('Error stack:', error.stack)
-        }
-      } else {
-        setError(t('errors.general'))
-      }
-
-      // Clear password field on error for security
-      setPassword('')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const handleGoogleSignIn = async (role: 'buyer' | 'seller') => {
     setGoogleLoading(true)
     setError('')
     setShowRoleModal(false)
-
     try {
       await signInWithGoogle(role)
-      // User will be redirected based on their role
     } catch (error: unknown) {
-      console.error('Google signin error:', error)
       if (error instanceof Error) {
         setError(error.message)
       } else {
-        setError(t('auth.googleSignInFailed'))
+        setError(t('auth.googleSignInFailed', 'Google sign in failed. Please try again.'))
       }
     } finally {
       setGoogleLoading(false)
     }
   }
 
-  const handleMicrosoftSignIn = async (role: 'buyer' | 'seller') => {
-    setMicrosoftLoading(true)
-    setError('')
-    setShowRoleModal(false)
-
-    try {
-      await signInWithMicrosoft(role)
-      // User will be redirected based on their role
-    } catch (error: unknown) {
-      console.error('Microsoft signin error:', error)
-      if (error instanceof Error) {
-        setError(error.message)
-      } else {
-        setError('Microsoft sign in failed. Please try again.')
-      }
-    } finally {
-      setMicrosoftLoading(false)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[var(--bg-1)] via-[var(--bg-2)] to-[var(--bg-3)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background Elements */}
+      {/* Background Orbs */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Floating Orbs */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-[var(--saffron)]/20 to-[var(--turquoise)]/20 rounded-full blur-xl animate-float"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-[var(--emerald)]/20 to-[var(--maroon)]/20 rounded-full blur-lg animate-float-slow"></div>
-        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-br from-[var(--turquoise)]/20 to-[var(--saffron)]/20 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-gradient-to-br from-[var(--maroon)]/20 to-[var(--emerald)]/20 rounded-full blur-xl animate-float-slow"></div>
+        <div className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-br from-[var(--primary)]/20 to-[var(--accent)]/20 rounded-full blur-2xl animate-float" />
+        <div className="absolute bottom-32 right-16 w-56 h-56 bg-gradient-to-br from-[var(--accent)]/15 to-[var(--primary)]/15 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute top-1/2 left-1/3 w-32 h-32 bg-[var(--primary)]/10 rounded-full blur-xl" />
       </div>
 
-      <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Left Side - Branding & Features */}
-        <div className="hidden lg:block space-y-8">
-          <div className="space-y-6">
-            <div className="flex items-center space-x-3">
-              <div className="relative w-32 h-32 flex items-center justify-center">
-                <Image src="/artisync-symbol.png" alt="Artisync Symbol" fill className="object-contain drop-shadow-lg" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-[var(--text)]">{t('auth.branding.kalaMitra')}</h1>
-                <p className="text-[var(--text-muted)]">{t('auth.branding.yourArtisanMarketplace')}</p>
-              </div>
+      <div className="max-w-5xl w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        {/* Left — Branding */}
+        <div className="hidden lg:flex flex-col gap-10">
+          <div className="flex items-center gap-4">
+            <ArtisyncLogo className="w-20 h-20" />
+            <div>
+              <h1 className="text-3xl font-bold font-serif text-[var(--text)]">Artisync</h1>
+              <p className="text-[var(--muted)] text-sm">India's artisan marketplace</p>
             </div>
-
-            <h2 className="text-4xl font-bold text-[var(--text)] leading-tight">
-              {t('auth.branding.welcomeBackToCreativeJourney')}
-            </h2>
-
-            <p className="text-lg text-[var(--text-muted)] leading-relaxed">
-              {t('auth.branding.connectWithArtisans')}
-            </p>
           </div>
 
-          {/* Feature Cards */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="card-glass p-6 space-y-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--saffron)] to-[var(--turquoise)] rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-semibold text-[var(--text)]">{t('auth.branding.securePlatform')}</h3>
-              <p className="text-sm text-[var(--text-muted)]">{t('auth.branding.yourDataProtected')}</p>
-            </div>
+          <h2 className="text-4xl font-bold font-serif text-[var(--text)] leading-tight">
+            Where Tradition<br />
+            <span className="text-[var(--primary)]">Meets Modernity.</span>
+          </h2>
 
-            <div className="card-glass p-6 space-y-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--emerald)] to-[var(--maroon)] rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-white" />
+          <p className="text-lg text-[var(--muted)] leading-relaxed">
+            Discover handcrafted treasures from master artisans across India. Every purchase preserves a cultural legacy.
+          </p>
+
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { icon: Shield, label: 'Verified Artisans', sub: 'Every seller is authenticated', from: 'from-[var(--primary)]', to: 'to-[var(--accent)]' },
+              { icon: Users, label: '10,000+ Artisans', sub: 'From 28 states of India', from: 'from-[var(--accent)]', to: 'to-emerald-600' },
+              { icon: Palette, label: '45+ Categories', sub: 'From silk to bidriware', from: 'from-emerald-600', to: 'to-[var(--primary)]' },
+              { icon: Sparkle, label: 'AI-Powered', sub: 'Smart recommendations', from: 'from-violet-500', to: 'to-[var(--primary)]' },
+            ].map(({ icon: Icon, label, sub, from, to }) => (
+              <div key={label} className="glass-card p-5 rounded-2xl">
+                <div className={`w-10 h-10 bg-gradient-to-br ${from} ${to} rounded-xl flex items-center justify-center mb-3`}>
+                  <Icon className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-semibold text-[var(--text)] text-sm">{label}</h3>
+                <p className="text-xs text-[var(--muted)] mt-0.5">{sub}</p>
               </div>
-              <h3 className="font-semibold text-[var(--text)]">{t('auth.branding.trustedCommunity')}</h3>
-              <p className="text-sm text-[var(--text-muted)]">{t('auth.branding.joinVerifiedArtisans')}</p>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* Right Side - Sign In Form */}
+        {/* Right — Sign In Card */}
         <div className="w-full max-w-md mx-auto">
-          <div className="card-glass p-8 space-y-8">
-            {/* Header */}
-            <div className="text-center space-y-4">
-              <div className="relative w-24 h-24 mx-auto">
-                <Image src="/artisync-symbol.png" alt="Artisync Symbol" fill className="object-contain" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-[var(--text)]">
-                  {t('auth.welcomeBack')}
-                </h2>
-                <p className="text-[var(--text-muted)] mt-2">
-                  {t('auth.signinSubtitle')}
-                </p>
-              </div>
+          <div className="glass-card p-8 sm:p-10 rounded-3xl shadow-2xl">
+            {/* Mobile logo */}
+            <div className="flex lg:hidden justify-center mb-8">
+              <ArtisyncLogo className="w-16 h-16" />
             </div>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              {error && (
-                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm flex items-center">
-                  <AlertCircle className="h-5 w-5 mr-2" />
-                  {error}
-                </div>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold font-serif text-[var(--text)] mb-2">
+                Welcome Back
+              </h2>
+              <p className="text-[var(--muted)]">Sign in to continue your artisan journey</p>
+            </div>
+
+            {error && (
+              <div className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
+                {error}
+              </div>
+            )}
+
+            {/* Google Sign-In Button */}
+            <button
+              type="button"
+              onClick={() => setShowRoleModal(true)}
+              disabled={googleLoading}
+              className="w-full flex items-center justify-center gap-3 py-4 px-6 border border-[var(--border)] rounded-2xl text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] hover:border-[var(--accent)] transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-medium text-base group"
+            >
+              {googleLoading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                  </svg>
+                  Continue with Google
+                </>
               )}
+            </button>
 
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-[var(--text)] mb-2">
-                    {t('auth.emailAddress')}
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 bg-[var(--bg-2)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--saffron)] focus:border-transparent transition-all duration-200 text-[var(--text)] placeholder-[var(--text-muted)]"
-                    placeholder={t('auth.enterYourEmail')}
-                  />
-                </div>
+            <p className="text-center text-xs text-[var(--muted)] mt-6 px-4">
+              By continuing, you agree to our{' '}
+              <span className="text-[var(--primary)] cursor-pointer">Terms of Service</span>
+              {' '}and{' '}
+              <span className="text-[var(--primary)] cursor-pointer">Privacy Policy</span>.
+            </p>
 
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-[var(--text)] mb-2">
-                    {t('auth.password')}
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="password"
-                      name="password"
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-4 py-3 bg-[var(--bg-2)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--saffron)] focus:border-transparent transition-all duration-200 text-[var(--text)] placeholder-[var(--text-muted)] pr-12"
-                      placeholder={t('auth.enterYourPassword')}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-0 pr-4 flex items-center text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="group relative w-full flex justify-center items-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-[var(--saffron)] to-[var(--maroon)] hover:from-[var(--saffron)]/90 hover:to-[var(--maroon)]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--saffron)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
-                >
-                  {loading ? (
-                    <div className="flex items-center">
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      {t('auth.signingIn')}
-                    </div>
-                  ) : (
-                    <div className="flex items-center">
-                      {t('navbar.signIn')}
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  )}
-                </button>
-
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-[var(--border)]" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-[var(--bg-1)] text-[var(--text-muted)]">{t('auth.orContinueWith')}</span>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedProvider('google')
-                    setShowRoleModal(true)
-                  }}
-                  disabled={googleLoading || microsoftLoading}
-                  className="w-full flex justify-center items-center px-4 py-3 border border-[var(--border)] rounded-xl text-sm font-medium text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--saffron)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-                >
-                  {googleLoading ? (
-                    <div className="flex items-center">
-                      <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mr-2"></div>
-                      {t('auth.signingIn')}
-                    </div>
-                  ) : (
-                    <div className="flex items-center">
-                      <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                      </svg>
-                      {t('auth.signinWithGoogle')}
-                    </div>
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedProvider('microsoft')
-                    setShowRoleModal(true)
-                  }}
-                  disabled={googleLoading || microsoftLoading}
-                  className="w-full flex justify-center items-center px-4 py-3 border border-[var(--border)] rounded-xl text-sm font-medium text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--saffron)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-                >
-                  {microsoftLoading ? (
-                    <div className="flex items-center">
-                      <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mr-2"></div>
-                      {t('auth.signingIn')}
-                    </div>
-                  ) : (
-                    <div className="flex items-center">
-                      <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                        <path fill="#F25022" d="M1 1h10v10H1z" />
-                        <path fill="#7FBA00" d="M13 1h10v10H13z" />
-                        <path fill="#00A4EF" d="M1 13h10v10H1z" />
-                        <path fill="#FFB900" d="M13 13h10v10H13z" />
-                      </svg>
-                      Sign in with Microsoft
-                    </div>
-                  )}
-                </button>
-              </div>
-
-              <div className="text-center space-y-2">
-                <p className="text-sm text-[var(--text-muted)]">
-                  {t('auth.dontHaveAccount')}{' '}
-                  <Link href="/auth/signup" className="font-medium text-[var(--saffron)] hover:text-[var(--maroon)] transition-colors">
-                    {t('navbar.signUp')}
-                  </Link>
-                </p>
-                <p className="text-xs text-[var(--text-muted)] bg-[var(--bg-2)] p-2 rounded-lg">
-                  💡 {t('auth.chooseRoleTip')}
-                </p>
-              </div>
-            </form>
+            <div className="mt-8 pt-6 border-t border-[var(--border)] text-center">
+              <p className="text-sm text-[var(--muted)]">
+                New to Artisync?{' '}
+                <Link href="/auth/signup" className="font-semibold text-[var(--primary)] hover:text-[var(--accent)] transition-colors">
+                  Create an account
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Role Selection Modal */}
       {showRoleModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-[var(--bg-2)] border border-[var(--border)] shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-6">
-            <div className="text-center space-y-2">
-              <h3 className="text-2xl font-bold text-[var(--text)]">{t('auth.chooseRoleTitle')}</h3>
-              <p className="text-[var(--text-muted)]">
-                {t('auth.chooseRoleSubtitle')}
-              </p>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="glass-card rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <div className="text-center mb-6">
+              <ArtisyncLogo className="w-14 h-14 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold font-serif text-[var(--text)]">Join as...</h3>
+              <p className="text-[var(--muted)] mt-1">How would you like to use Artisync?</p>
             </div>
 
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl">
-              <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center">
-                <Sparkles className="w-4 h-4 mr-2" />
-                {t('auth.chooseRoleTip')}
-              </p>
-            </div>
-
-            <div className="space-y-3">
+            <div className="space-y-3 mb-4">
               <button
-                onClick={() => {
-                  if (selectedProvider === 'google') {
-                    handleGoogleSignIn('buyer')
-                  } else if (selectedProvider === 'microsoft') {
-                    handleMicrosoftSignIn('buyer')
-                  }
-                }}
-                disabled={googleLoading || microsoftLoading}
-                className="w-full flex items-center justify-center px-6 py-4 border border-[var(--border)] rounded-xl text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] transition-all duration-200 disabled:opacity-50 group"
+                onClick={() => handleGoogleSignIn('buyer')}
+                disabled={googleLoading}
+                className="w-full flex items-center gap-4 px-6 py-4 border border-[var(--border)] rounded-2xl text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] hover:border-[var(--primary)] transition-all duration-200 disabled:opacity-50 group"
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-[var(--saffron)] to-[var(--turquoise)] rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                  <Users className="w-5 h-5 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Users className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-left">
-                  <div className="font-medium">{t('auth.continueAsBuyer')}</div>
-                  <div className="text-xs text-[var(--text-muted)]">{t('auth.branding.shopForUniqueArt')}</div>
+                  <div className="font-semibold">Buyer</div>
+                  <div className="text-xs text-[var(--muted)]">Shop authentic handcrafted treasures</div>
                 </div>
               </button>
 
               <button
-                onClick={() => {
-                  if (selectedProvider === 'google') {
-                    handleGoogleSignIn('seller')
-                  } else if (selectedProvider === 'microsoft') {
-                    handleMicrosoftSignIn('seller')
-                  }
-                }}
-                disabled={googleLoading || microsoftLoading}
-                className="w-full flex items-center justify-center px-6 py-4 border border-[var(--border)] rounded-xl text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] transition-all duration-200 disabled:opacity-50 group"
+                onClick={() => handleGoogleSignIn('seller')}
+                disabled={googleLoading}
+                className="w-full flex items-center gap-4 px-6 py-4 border border-[var(--border)] rounded-2xl text-[var(--text)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] hover:border-[var(--accent)] transition-all duration-200 disabled:opacity-50 group"
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-[var(--emerald)] to-[var(--maroon)] rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                  <Palette className="w-5 h-5 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-br from-[var(--accent)] to-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Palette className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-left">
-                  <div className="font-medium">{t('auth.continueAsArtisan')}</div>
-                  <div className="text-xs text-[var(--text-muted)]">{t('auth.branding.sellYourCreations')}</div>
+                  <div className="font-semibold">Artisan / Seller</div>
+                  <div className="text-xs text-[var(--muted)]">Showcase and sell your craft globally</div>
                 </div>
               </button>
             </div>
 
             <button
               onClick={() => setShowRoleModal(false)}
-              className="w-full px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+              className="w-full py-2 text-sm text-[var(--muted)] hover:text-[var(--text)] transition-colors"
             >
-              {t('common.cancel')}
+              Cancel
             </button>
           </div>
         </div>

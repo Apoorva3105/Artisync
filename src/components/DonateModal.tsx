@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { X } from 'lucide-react';
+import { X } from '@phosphor-icons/react';
 import { supabase } from '@/lib/supabase';
 
 interface DonateModalProps {

@@ -1,3 +1,4 @@
+import { Sparkle } from '@phosphor-icons/react'
 export default function SuccessStoriesPage() {
   return (
     <main className="heritage-bg min-h-screen">
@@ -20,7 +21,7 @@ export default function SuccessStoriesPage() {
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[var(--heritage-gold)] via-[var(--heritage-red)] to-[var(--heritage-gold)]"></div>
 
           <div className="max-w-xl mx-auto space-y-4">
-            <span className="text-6xl animate-pulse">✨</span>
+            <Sparkle weight="fill" className="w-16 h-16 text-yellow-500 animate-pulse mx-auto mb-4" />
             <h2 className="text-3xl font-serif font-bold text-[var(--heritage-brown)]">Coming Soon</h2>
             <p className="text-[var(--muted)] text-lg leading-relaxed">
               Artisync is currently in its prototype phase. Once we are fully live, this space will be filled with the inspiring journeys of our community.

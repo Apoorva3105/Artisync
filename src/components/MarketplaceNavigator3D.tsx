@@ -534,15 +534,15 @@ interface NavigatorProps {
         className={`pointer-events-none absolute top-2 right-2 ${overlayBg} text-[0.65rem] px-2 py-0.5 rounded-lg shadow-lg font-semibold backdrop-blur-md hidden sm:flex sm:items-center sm:gap-1 md:text-[0.7rem] md:px-2 md:py-1 md:rounded-xl lg:text-[0.8rem] lg:px-3 lg:py-1 lg:rounded-xl`}
       >
         <span className="inline-flex items-center gap-1">
-          <span role="img" aria-label="rotate">🖱️</span> Left-drag: Rotate
+          <span role="img" aria-label="rotate"></span> Left-drag: Rotate
           <span className="mx-1">•</span>
-          <span role="img" aria-label="pan">🖱️</span> Right-drag: Pan
+          <span role="img" aria-label="pan"></span> Right-drag: Pan
           <span className="mx-1">•</span>
-          <span role="img" aria-label="zoom">🖱️</span> Wheel: Zoom
+          <span role="img" aria-label="zoom"></span> Wheel: Zoom
           <span className="mx-1">•</span>
-          <span role="img" aria-label="move">🖱️</span> Double-click: Move to ground
+          <span role="img" aria-label="move"></span> Double-click: Move to ground
           <span className="mx-1">•</span>
-          <span role="img" aria-label="wasd">⌨️</span> WASD/Arrows: Move camera
+          <span role="img" aria-label="wasd"></span> WASD/Arrows: Move camera
         </span>
       </div>
       {/* Minimal joystick overlay for mobile */}

@@ -1,6 +1,7 @@
 'use client';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/components/LanguageProvider';
+import { Check } from '@phosphor-icons/react'
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -55,27 +56,27 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.sellerFeatureGroups.coreTools')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f1')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f2')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f3')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f1')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f2')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f3')}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.sellerFeatureGroups.growthCommunity')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f4')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f5')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f6')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f7')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f4')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f5')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f6')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f7')}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.sellerFeatureGroups.smartFeatures')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f8')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f9')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f10')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.sellerFeatures.f11')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f8')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f9')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f10')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.sellerFeatures.f11')}</li>
                   </ul>
                 </div>
               </div>
@@ -90,27 +91,27 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.buyerFeatureGroups.coreExperience')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f1')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f2')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f3')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f4')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f1')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f2')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f3')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f4')}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.buyerFeatureGroups.socialCommunity')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f5')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f6')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f7')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f8')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f5')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f6')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f7')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f8')}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.buyerFeatureGroups.immersiveAI')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f9')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f10')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.buyerFeatures.f11')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f9')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f10')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.buyerFeatures.f11')}</li>
                   </ul>
                 </div>
               </div>
@@ -125,26 +126,26 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.ngoFeatureGroups.allSellerTools')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f1')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f2')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f1')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f2')}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.ngoFeatureGroups.ngoSpecific')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f3')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f4')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f5')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f6')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f7')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f3')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f4')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f5')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f6')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f7')}</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--heritage-gold)] mb-1">{t('aboutUs.ngoFeatureGroups.supportGrowth')}</h4>
                   <ul className="space-y-2 text-[var(--muted)] list-inside">
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f8')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f9')}</li>
-                    <li><span className="mr-2 text-[var(--heritage-gold)]">✓</span>{t('aboutUs.ngoFeatures.f10')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f8')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f9')}</li>
+                    <li><Check weight="bold" className="mr-2 text-[var(--heritage-gold)]" />{t('aboutUs.ngoFeatures.f10')}</li>
                   </ul>
                 </div>
               </div>

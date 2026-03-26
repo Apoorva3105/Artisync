@@ -3,8 +3,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { Camera, Sparkles, Save, User, Store, Mic } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Camera, Sparkle, FloppyDisk as Save, User, Storefront as Store, Microphone } from '@phosphor-icons/react'
 import { supabase } from '@/lib/supabase'
 import AIService from '@/lib/ai-service'
 import { Database } from '@/lib/supabase'
@@ -388,7 +388,7 @@ export default function ProfileManager({ profile, products, onProfileUpdate }: P
                     className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-white hover:bg-gray-100"
                     title={listeningField === 'name' ? 'Listening...' : 'Speak'}
                   >
-                    <Mic className={`w-5 h-5 ${listeningField === 'name' ? 'animate-pulse text-red-500' : 'text-blue-500'}`} />
+                     <Microphone className={`w-5 h-5 ${listeningField === 'name' ? 'animate-pulse text-red-500' : 'text-blue-500'}`} />
                   </button>
                 </div>
               </div>
@@ -411,7 +411,7 @@ export default function ProfileManager({ profile, products, onProfileUpdate }: P
                     className="absolute right-2 top-2 p-1 rounded-full bg-white hover:bg-gray-100"
                     title={listeningField === 'bio' ? 'Listening...' : 'Speak'}
                   >
-                    <Mic className={`w-5 h-5 ${listeningField === 'bio' ? 'animate-pulse text-red-500' : 'text-blue-500'}`} />
+                     <Microphone className={`w-5 h-5 ${listeningField === 'bio' ? 'animate-pulse text-red-500' : 'text-blue-500'}`} />
                   </button>
                 </div>
               </div>
@@ -426,7 +426,7 @@ export default function ProfileManager({ profile, products, onProfileUpdate }: P
                     disabled={aiLoading}
                     className="flex items-center text-sm text-orange-600 hover:text-orange-700 disabled:opacity-50"
                   >
-                    <Sparkles className="w-4 h-4 mr-1" />
+                    <Sparkle className="w-4 h-4 mr-1" />
                     {aiLoading ? t('seller.profile.generating') : t('seller.profile.aiGenerate')}
                   </button>
                 </div>
@@ -444,7 +444,7 @@ export default function ProfileManager({ profile, products, onProfileUpdate }: P
                     className="absolute right-2 top-2 p-1 rounded-full bg-white hover:bg-gray-100"
                     title={listeningField === 'store_description' ? 'Listening...' : 'Speak'}
                   >
-                    <Mic className={`w-5 h-5 ${listeningField === 'store_description' ? 'animate-pulse text-red-500' : 'text-blue-500'}`} />
+                     <Microphone className={`w-5 h-5 ${listeningField === 'store_description' ? 'animate-pulse text-red-500' : 'text-blue-500'}`} />
                   </button>
                 </div>
               </div>
@@ -506,7 +506,7 @@ export default function ProfileManager({ profile, products, onProfileUpdate }: P
       {!isEditing && (
         <div className="mt-6 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg-2)]">
           <div className="flex items-start">
-            <Sparkles className="w-5 h-5 text-orange-600 mr-2 mt-0.5" />
+            <Sparkle className="w-5 h-5 text-orange-600 mr-2 mt-0.5" />
             <div>
               <h4 className="text-sm font-semibold text-orange-800 mb-1">{t('seller.profile.aiDescriptionTitle')}</h4>
               <p className="text-sm text-[var(--muted)]">

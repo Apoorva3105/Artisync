@@ -1,19 +1,30 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { useLanguage } from '@/components/LanguageProvider'
-import { ShoppingCart, LogOut, Menu, X, Palette, Moon, Sun, User, Video, Gift, Heart, LayoutDashboard, Package, Bell } from 'lucide-react'
+import { ShoppingCart, SignOut, List, X, Palette, Moon, Sun, User, VideoCamera, Gift, Heart, SquaresFour, Package, Bell } from '@phosphor-icons/react'
 import { useTheme } from './ThemeProvider'
-import Leaderboard from './Leaderboard'
 
 import { useTranslation } from 'react-i18next';
 import { translateText } from '@/lib/translate';
-import Image from 'next/image';
+import ArtisyncLogo from '@/components/ArtisyncLogo';
 import '@/lib/i18n';
+
+type NotificationItem = {
+  id: string
+  title: string
+  body: string
+  read: boolean
+  created_at: string
+}
+
+type NotificationInsertPayload = {
+  new?: NotificationItem
+}
 
 export default function Navbar() {
   // Navbar onboarding tour steps (responsive)
@@ -23,66 +34,66 @@ export default function Navbar() {
       return [
         {
           element: '#navbar-brand-mobile',
-          intro: '<span style="font-size:1.2em">💜 <b>Welcome to Artisync!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
+          intro: '<span style="font-size:1.2em"><b>Welcome to Artisync!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
         },
         {
           element: '#navbar-mobile-theme-toggle',
-          intro: '<span style="font-size:1.1em">🌗 <b>Theme</b></span><br/>Switch between light and dark mode.'
+          intro: '<span style="font-size:1.1em"><b>Theme</b></span><br/>Switch between light and dark mode.'
         },
         {
           element: '#navbar-leaderboard',
-          intro: '<span style="font-size:1.1em">🥇 <b>Leaderboard</b></span><br/>See top contributors and winners.'
+          intro: '<span style="font-size:1.1em"><b>Leaderboard</b></span><br/>See top contributors and winners.'
         },
         {
           element: '#navbar-mobile-reels',
-          intro: '<span style="font-size:1.1em">🎬 <b>Reels</b></span><br/>Watch creative reels and ads.'
+          intro: '<span style="font-size:1.1em"><b>Reels</b></span><br/>Watch creative reels and ads.'
         },
         {
           element: 'a[href="/profile"]',
-          intro: '<span style="font-size:1.1em">👤 <b>Profile</b></span><br/>View and edit your profile.'
+          intro: '<span style="font-size:1.1em"><b>Profile</b></span><br/>View and edit your profile.'
         },
         {
           element: 'button.p-3.rounded-2xl',
-          intro: '<span style="font-size:1.1em">☰ <b>Menu</b></span><br/>Open the menu to access more features.'
+          intro: '<span style="font-size:1.1em"><b>Menu</b></span><br/>Open the menu to access more features.'
         },
       ];
     } else {
       return [
         {
           element: '.heritage-title',
-          intro: '<span style="font-size:1.2em">💜 <b>Welcome to Artisync!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
+          intro: '<span style="font-size:1.2em"><b>Welcome to Artisync!</b></span><br/>This is your <b>main navigation bar</b> to explore features.'
         },
         {
           element: 'a[href="/marketplace"]',
-          intro: '<span style="font-size:1.1em">🛍️ <b>Marketplace</b></span><br/>Browse and shop unique products.'
+          intro: '<span style="font-size:1.1em"><b>Marketplace</b></span><br/>Browse and shop unique products.'
         },
         {
           element: 'a[href="/reels"]',
-          intro: '<span style="font-size:1.1em">🎬 <b>Reels</b></span><br/>Watch creative reels and ads.'
+          intro: '<span style="font-size:1.1em"><b>Reels</b></span><br/>Watch creative reels and ads.'
         },
         {
           element: 'a[href="/auctions"]',
-          intro: '<span style="font-size:1.1em">🏆 <b>Auctions</b></span><br/>Participate in live auctions.'
+          intro: '<span style="font-size:1.1em"><b>Auctions</b></span><br/>Participate in live auctions.'
         },
         {
           element: 'a[href="/leaderboard"]',
-          intro: '<span style="font-size:1.1em">🥇 <b>Leaderboard</b></span><br/>See top contributors and winners.'
+          intro: '<span style="font-size:1.1em"><b>Leaderboard</b></span><br/>See top contributors and winners.'
         },
         {
           element: 'a[href="/cart"]',
-          intro: '<span style="font-size:1.1em">🛒 <b>Cart</b></span><br/>View your shopping cart.'
+          intro: '<span style="font-size:1.1em"><b>Cart</b></span><br/>View your shopping cart.'
         },
         {
           element: 'a[href="/gifts"]',
-          intro: '<span style="font-size:1.1em">🎁 <b>Gifts</b></span><br/>Send and receive gifts.'
+          intro: '<span style="font-size:1.1em"><b>Gifts</b></span><br/>Send and receive gifts.'
         },
         {
           element: 'button[aria-label="Toggle theme"]',
-          intro: '<span style="font-size:1.1em">🌗 <b>Theme</b></span><br/>Switch between light and dark mode.'
+          intro: '<span style="font-size:1.1em"><b>Theme</b></span><br/>Switch between light and dark mode.'
         },
         {
           element: '#navbar-mobile-profile',
-          intro: '<span style="font-size:1.1em">👤 <b>Profile</b></span><br/>View and edit your profile.'
+          intro: '<span style="font-size:1.1em"><b>Profile</b></span><br/>View and edit your profile.'
         },
       ];
     }
@@ -114,7 +125,7 @@ export default function Navbar() {
               highlightClass: 'artisync-intro-highlight',
               nextLabel: 'Next →',
               prevLabel: '← Back',
-              doneLabel: '✨ Done',
+              doneLabel: 'Done',
               skipLabel: 'Skip',
             })
               .oncomplete(() => {
@@ -134,28 +145,38 @@ export default function Navbar() {
   }, []);
 
   const { user, profile, signOut, loading } = useAuth();
-  const { currentLanguage, changeLanguage, isLoading: languageLoading } = useLanguage();
+  const { currentLanguage, changeLanguage } = useLanguage();
   const { theme, toggle } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [translatedName, setTranslatedName] = useState('');
-  const [leaderboardOpen, setLeaderboardOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const [mitraPoints, setMitraPoints] = useState<number | null>(null);
   const [hasLiveAuctions, setHasLiveAuctions] = useState(false)
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   // Unread notifications count
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState(0);
   // Notifications popup state
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [notificationsLoading, setNotificationsLoading] = useState(false);
   const notificationsDropdownRef = useRef<HTMLDivElement>(null);
   // New notification toast
   const [newNotificationToast, setNewNotificationToast] = useState<{ title: string; body: string } | null>(null);
   // Mobile notification indicator - red dot for new notifications
   const [showMobileNotificationDot, setShowMobileNotificationDot] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 60);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Fetch unread notifications count and subscribe to real-time updates
   useEffect(() => {
@@ -196,7 +217,7 @@ export default function Navbar() {
           table: 'notifications',
           filter: `user_id=eq.${user.id}`,
         },
-        (payload: any) => {
+        (payload: NotificationInsertPayload) => {
           // Show toast for new notification
           if (payload.new) {
             setNewNotificationToast({
@@ -220,7 +241,7 @@ export default function Navbar() {
     return () => {
       channel.unsubscribe();
     };
-  }, [user?.id]);
+  }, [user?.id, showMobileNotificationDot]);
 
   // Fetch notifications when popup opens
   useEffect(() => {
@@ -236,7 +257,7 @@ export default function Navbar() {
           .order('created_at', { ascending: false })
           .limit(10);
         if (error) throw error;
-        setNotifications(data || []);
+        setNotifications((data as NotificationItem[]) || []);
       } catch (err) {
         console.error('Error fetching notifications:', err);
         setNotifications([]);
@@ -258,7 +279,7 @@ export default function Navbar() {
           table: 'notifications',
           filter: `user_id=eq.${user.id}`,
         },
-        (payload: any) => {
+        () => {
           // Refetch after a small delay to ensure data consistency
           setTimeout(() => {
             fetchNotifications();
@@ -318,29 +339,29 @@ export default function Navbar() {
   };
 
   const languages = [
-    { code: 'en', label: 'English', flag: '🇬🇧' },
-    { code: 'hi', label: 'हिंदी', flag: '🇮🇳' },
-    { code: 'assamese', label: 'অসমীয়া', flag: '🇮🇳' },
-    { code: 'bengali', label: 'বাংলা', flag: '🇮🇳' },
-    { code: 'bodo', label: 'बर’ / बड़ो', flag: '🇮🇳' },
-    { code: 'dogri', label: 'डोगरी', flag: '🇮🇳' },
-    { code: 'gujarati', label: 'ગુજરાતી', flag: '🇮🇳' },
-    { code: 'kannad', label: 'ಕನ್ನಡ', flag: '🇮🇳' },
-    { code: 'kashmiri', label: 'کٲشُر / कश्मीरी', flag: '🇮🇳' },
-    { code: 'konkani', label: 'कोंकणी', flag: '🇮🇳' },
-    { code: 'maithili', label: 'मैथिली', flag: '🇮🇳' },
-    { code: 'malyalam', label: 'മലയാളം', flag: '🇮🇳' },
-    { code: 'manipuri', label: 'ꯃꯦꯇꯩꯂꯣꯟ (Meitei)', flag: '🇮🇳' },
-    { code: 'marathi', label: 'मराठी', flag: '🇮🇳' },
-    { code: 'nepali', label: 'नेपाली', flag: '🇳🇵' },
-    { code: 'oriya', label: 'ଓଡ଼ିଆ', flag: '🇮🇳' },
-    { code: 'punjabi', label: 'ਪੰਜਾਬੀ', flag: '🇮🇳' },
-    { code: 'sanskrit', label: 'संस्कृत', flag: '🇮🇳' },
-    { code: 'santhali', label: 'ᱥᱟᱱᱛᱟᱲᱤ', flag: '🇮🇳' },
-    { code: 'sindhi', label: 'سنڌي / सिंधी', flag: '🇮🇳' },
-    { code: 'tamil', label: 'தமிழ்', flag: '🇮🇳' },
-    { code: 'telgu', label: 'తెలుగు', flag: '🇮🇳' },
-    { code: 'urdu', label: 'اردو', flag: '🇵🇰' },
+    { code: 'en', label: 'English' },
+    { code: 'hi', label: 'हिंदी' },
+    { code: 'assamese', label: 'অসমীয়া' },
+    { code: 'bengali', label: 'বাংলা' },
+    { code: 'bodo', label: 'बर’ / बड़ो' },
+    { code: 'dogri', label: 'डोगरी' },
+    { code: 'gujarati', label: 'ગુજરાતી' },
+    { code: 'kannad', label: 'ಕನ್ನಡ' },
+    { code: 'kashmiri', label: 'کٲشُر / कश्मीरी' },
+    { code: 'konkani', label: 'कोंकणी' },
+    { code: 'maithili', label: 'मैथिली' },
+    { code: 'malyalam', label: 'മലയാളം' },
+    { code: 'manipuri', label: 'ꯃꯦꯇꯩꯂꯣꯟ (Meitei)' },
+    { code: 'marathi', label: 'मराठी' },
+    { code: 'nepali', label: 'नेपाली' },
+    { code: 'oriya', label: 'ଓଡ଼ିଆ' },
+    { code: 'punjabi', label: 'ਪੰਜਾਬੀ' },
+    { code: 'sanskrit', label: 'संस्कृत' },
+    { code: 'santhali', label: 'ᱥᱟᱱᱛᱟᱲᱤ' },
+    { code: 'sindhi', label: 'سنڌي / सिंधी' },
+    { code: 'tamil', label: 'தமிழ்' },
+    { code: 'telgu', label: 'తెలుగు' },
+    { code: 'urdu', label: 'اردو' },
   ];
 
   // Ensure client-side rendering to prevent hydration errors
@@ -515,13 +536,13 @@ export default function Navbar() {
   // Prevent hydration mismatch by showing consistent structure during loading
   if (!mounted) {
     return (
-      <nav className="glass-nav border-b border-heritage-gold/40 shadow-soft sticky top-0 z-50 heritage-bg">
+      <nav className="navbar glass-nav border-b border-heritage-gold/40 shadow-soft sticky top-0 z-50 heritage-bg">
         <div className="container-custom">
           <div className="flex justify-between items-center py-4">
             {/* Logo placeholder */}
             <div className="flex items-center space-x-4 group">
               <div className="relative w-14 h-14 flex items-center justify-center">
-                <Image src="/artisync-symbol.png" alt="Artisync Symbol" width={56} height={56} className="object-contain" />
+                <ArtisyncLogo className="w-14 h-14" />
               </div>
               <span className="text-3xl font-bold heritage-title">Artisync</span>
             </div>
@@ -585,14 +606,14 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="glass-nav border-b border-heritage-gold/40 shadow-soft sticky top-0 z-50 font-display">
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''} glass-nav border-b border-heritage-gold/40 shadow-soft sticky top-0 z-50 font-display`}>
       <div className="container-custom font-display">
         <div className="flex justify-between items-center py-3">
           {/* Logo - Short brand for mobile, full for desktop */}
           <div className="flex items-center space-x-4 group">
             <Link href="/" className="flex items-center space-x-4 group">
               <div className="relative w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
-                <Image src="/artisync-symbol.png" alt="Artisync Symbol" width={56} height={56} className="object-contain drop-shadow-md" priority />
+                <ArtisyncLogo className="w-14 h-14 group-hover:scale-110 transition-all duration-500" />
               </div>
               <span className="text-3xl font-bold heritage-title hidden md:inline" key={`brand-${currentLanguage}`}>{t('brand.name')}</span>
               {/* Mobile: Show "AS" when signed in, "Artisync" when not */}
@@ -610,7 +631,7 @@ export default function Navbar() {
               className="text-[var(--text)] hover:text-heritage-gold transition-all duration-300 font-medium hover:scale-105 transform hover:translate-y-[-2px] relative group flex items-center px-3 py-2"
               title="Reels"
             >
-              <Video className="w-6 h-6 mr-2" />
+              <VideoCamera className="w-6 h-6 mr-2" />
               <span className="text-base">{t('navbar.reels')}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-heritage-gold to-heritage-red transition-all duration-300 group-hover:w-full"></span>
             </Link>
@@ -876,7 +897,7 @@ export default function Navbar() {
                                   className="flex items-center space-x-3 w-full px-3 py-2.5 rounded-xl hover:bg-[var(--bg-3)] transition-colors group text-sm"
                                 >
                                   <div className="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center border border-amber-100 dark:border-amber-800 group-hover:border-amber-400 transition-colors">
-                                    <LayoutDashboard className="w-4 h-4 text-amber-600 dark:text-amber-400 group-hover:text-amber-500" />
+                                    <SquaresFour className="w-4 h-4 text-amber-600 dark:text-amber-400 group-hover:text-amber-500" />
                                   </div>
                                   <span className="text-[var(--text)] font-medium">Seller Dashboard</span>
                                 </Link>
@@ -928,7 +949,7 @@ export default function Navbar() {
                                   >
                                     {languages.map(lang => (
                                       <option key={lang.code} value={lang.code}>
-                                        {lang.flag} {lang.label}
+                                        {lang.label}
                                       </option>
                                     ))}
                                   </select>
@@ -943,7 +964,7 @@ export default function Navbar() {
                                 className="flex items-center space-x-3 w-full px-3 py-2.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors group text-sm mt-1"
                               >
                                 <div className="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/10 flex items-center justify-center border border-transparent group-hover:border-red-200 dark:group-hover:border-red-800 transition-colors">
-                                  <LogOut className="w-4 h-4 text-red-500" />
+                                  <SignOut className="w-4 h-4 text-red-500" />
                                 </div>
                                 <span className="text-red-600 font-medium">Sign Out</span>
                               </button>
@@ -1009,7 +1030,7 @@ export default function Navbar() {
             </Link>
             {/* Reels button (mobile) - in menu, icon always black */}
             <Link href="/reels" className="p-2 rounded-xl flex items-center justify-center" title="Reels">
-              < Video id="navbar-mobile-reels" className="w-6 h-6 text-black" />
+              <VideoCamera id="navbar-mobile-reels" className="w-6 h-6 text-[var(--text)]" />
             </Link>
             {/* Theme toggle (mobile) */}
             <button
@@ -1032,7 +1053,7 @@ export default function Navbar() {
                 }}
                 className="relative p-3 rounded-2xl text-[var(--text)] hover:text-heritage-gold hover:bg-heritage-gold/50 transition-all duration-300 hover:scale-105"
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMenuOpen ? <X className="w-6 h-6" /> : <List className="w-6 h-6" />}
               </button>
               {showMobileNotificationDot && (
                 <motion.div
@@ -1075,7 +1096,7 @@ export default function Navbar() {
               {/* Reels/Ads icon - enabled, no background, always adaptive icon */}
               <Link href="/reels" className="flex items-center px-6 py-3" onClick={() => setIsMenuOpen(false)}>
 
-                <Video className="w-6 h-6 text-[var(--text)] mr-3" />
+                <VideoCamera className="w-6 h-6 text-[var(--text)] mr-3" />
                 <span className="font-medium text-[var(--text)]">{t('navbar.reels')}/{t('navbar.ads')}</span>
               </Link>
               {loading ? (
@@ -1149,7 +1170,7 @@ export default function Navbar() {
                       onClick={handleSignOut}
                       className="flex items-center space-x-2 text-[var(--text)] hover:text-heritage-gold transition-all duration-300 px-6 py-3 hover:bg-heritage-gold/50 rounded-2xl w-full hover:translate-x-2 transform"
                     >
-                      <LogOut className="w-4 h-4" />
+                      <SignOut className="w-4 h-4" />
                       <span>{t('navbar.signOut')}</span>
                     </button>
                   </div>

@@ -1,3 +1,4 @@
+import { Eye, Users, Trophy, Handshake, Lightbulb } from '@phosphor-icons/react'
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -187,21 +188,21 @@ export default function SellerAnalytics({ sellerId }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <div className="rounded-2xl shadow-lg border border-orange-200 dark:border-[var(--border)] bg-gradient-to-br from-orange-50/80 via-yellow-100/80 to-white/70 dark:from-orange-900/30 dark:via-yellow-900/30 dark:to-black/40 backdrop-blur-md bg-opacity-70 p-6 flex flex-col items-center justify-center">
           <div className="mb-2 text-3xl sm:text-4xl text-orange-600 dark:text-orange-400 font-extrabold flex items-center gap-2">
-            <span>👁️</span>
+            <Eye className="w-5 h-5" />
             {totalViews}
           </div>
           <div className="text-sm sm:text-base text-[var(--muted)] font-medium tracking-wide">{t('seller.analyticsShort.stallViews30d')}</div>
         </div>
   <div className="rounded-2xl shadow-lg border border-yellow-200 dark:border-[var(--border)] bg-gradient-to-br from-yellow-50/80 via-orange-100/80 to-white/70 dark:from-yellow-900/30 dark:via-orange-900/30 dark:to-black/40 backdrop-blur-md bg-opacity-70 p-6 flex flex-col items-center justify-center">
           <div className="mb-2 text-3xl sm:text-4xl text-yellow-600 dark:text-yellow-400 font-extrabold flex items-center gap-2">
-            <span>🧑‍🤝‍🧑</span>
+            <Users className="w-5 h-5" />
             {uniqueVisitors}
           </div>
           <div className="text-sm sm:text-base text-[var(--muted)] font-medium tracking-wide">{t('seller.analyticsShort.uniqueVisitors30d')}</div>
         </div>
   <div className="rounded-2xl shadow-lg border border-orange-100 dark:border-[var(--border)] bg-gradient-to-br from-orange-100/80 via-yellow-50/80 to-white/70 dark:from-orange-900/30 dark:via-yellow-900/30 dark:to-black/40 backdrop-blur-md bg-opacity-70 p-6 flex flex-col">
           <div className="mb-2 text-lg sm:text-xl font-bold text-orange-700 dark:text-orange-400 flex items-center gap-2">
-            <span>🏆</span>
+            <Trophy className="w-5 h-5" />
             {t('seller.analyticsShort.topProducts30d')}
           </div>
           {topProducts.length === 0 ? (
@@ -223,7 +224,7 @@ export default function SellerAnalytics({ sellerId }: Props) {
       {collabStats.activeCollaborations > 0 && (
   <div className="rounded-2xl shadow-xl border border-yellow-200 dark:border-yellow-900 bg-gradient-to-br from-yellow-100/80 via-orange-50/80 to-white/70 dark:from-yellow-900/30 dark:via-orange-900/30 dark:to-black/40 backdrop-blur-md bg-opacity-70 p-6">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl sm:text-4xl">🤝</span>
+            <Handshake className="w-10 h-10 text-emerald-500" />
             <h3 className="text-lg sm:text-2xl font-bold text-yellow-700 dark:text-yellow-400 tracking-wide">
               {t('collaboration.title')}
             </h3>
@@ -268,7 +269,7 @@ export default function SellerAnalytics({ sellerId }: Props) {
       {/* AI Tips Section - Modern Card */}
   <div className="rounded-2xl shadow-lg border border-orange-200 dark:border-[var(--border)] bg-gradient-to-br from-orange-50/80 via-yellow-100/80 to-white/70 dark:from-orange-900/30 dark:via-yellow-900/30 dark:to-black/40 backdrop-blur-md bg-opacity-70 p-6">
         <div className="flex items-start gap-3">
-          <div className="text-2xl sm:text-3xl text-orange-600 dark:text-orange-400">💡</div>
+          <Lightbulb className="w-8 h-8 text-orange-600 dark:text-orange-400" />
           <div className="flex-1 min-w-0">
             <div className="text-sm font-semibold text-orange-700 dark:text-orange-400 mb-2">{t('seller.analyticsShort.tipsTitle')}</div>
             {toBullets(guidance).length > 1 ? (

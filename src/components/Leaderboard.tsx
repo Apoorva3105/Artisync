@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { Trophy, X, Crown, Medal, Award, User } from 'lucide-react'
+import { Trophy, X, Crown, Medal, Medal as Award, User } from '@phosphor-icons/react'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 
@@ -19,6 +19,8 @@ type LeaderboardProps = {
   embedMode?: boolean;
 };
 
+import { MOCK_LEADERS } from '@/lib/mockData'
+
 export default function Leaderboard({ open = true, onClose, embedMode = false }: LeaderboardProps) {
   const { t } = useTranslation()
   const [leaders, setLeaders] = useState<Leader[]>([])
@@ -26,30 +28,10 @@ export default function Leaderboard({ open = true, onClose, embedMode = false }:
 
   useEffect(() => {
     if (!open) return;
-    fetchData();
+    // Use mock data directly
+    setLeaders(MOCK_LEADERS);
   }, [open]);
 
-  async function fetchData() {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/leaderboard')
-      if (!res.ok) throw new Error('Failed')
-      const data = await res.json()
-      setLeaders(data.leaders || [])
-    } catch (err) {
-      console.error('leaderboard fetch failed', err)
-      // Fallback data for preview if API fails
-      setLeaders([
-        { user_id: '1', name: 'Priya Sharma', mitraPoints: 12500, auctionsWon: 15, profile_image: null },
-        { user_id: '2', name: 'Rahul Verma', mitraPoints: 9800, auctionsWon: 8, profile_image: null },
-        { user_id: '3', name: 'Amit Patel', mitraPoints: 8500, auctionsWon: 6, profile_image: null },
-        { user_id: '4', name: 'Sneha Gupta', mitraPoints: 6200, auctionsWon: 4, profile_image: null },
-        { user_id: '5', name: 'Vikram Singh', mitraPoints: 5400, auctionsWon: 3, profile_image: null },
-      ])
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (!open) return null;
 

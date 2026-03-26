@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { motion, AnimatePresence } from 'framer-motion'
-import { X, Gift, Users, DollarSign, User, Heart } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
+import { X, Gift, Users, CurrencyDollar as DollarSign, User, Heart } from '@phosphor-icons/react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
 

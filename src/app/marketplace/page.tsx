@@ -3,8 +3,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { Search, Filter, ShoppingCart, Heart, Sparkles, Volume2, StopCircle } from 'lucide-react'
+import { motion } from 'motion/react'
+import { MagnifyingGlass as Search, Funnel as Filter, ShoppingCart, Heart, Sparkle, SpeakerHigh as Volume2, StopCircle, Warning, Cube, Handshake, DeviceMobile, Palette } from '@phosphor-icons/react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
 import { logActivity } from '@/lib/activity'
@@ -79,32 +79,32 @@ function MarketplaceContent() {
     return [
       {
         element: isMobile ? '#navbar-brand-mobile' : 'a[href="/marketplace"]',
-        intro: '<span style="font-size:1.2em">💜 <b>Welcome to Artisync!</b></span><br/>This is the <b>marketplace</b> where you can explore unique products.',
+        intro: '<span style="font-size:1.2em"><b>Welcome to Artisync!</b></span><br/>This is the <b>marketplace</b> where you can explore unique products.',
       },
       {
         element: 'input[aria-label]',
-        intro: '<span style="font-size:1.1em">🔍 <b>Search</b></span><br/>Use this <b>search box</b> to find products by name, category, or description.',
+        intro: '<span style="font-size:1.1em"><b>Search</b></span><br/>Use this <b>search box</b> to find products by name, category, or description.',
       },
       {
         element: '#joyride-3d-bazaar-btn',
-        intro: '<span style="font-size:1.1em">🛍️ <b>3D Bazaar</b></span><br/>Click here to view the <b>immersive 3D bazaar</b> experience.',
+        intro: '<span style="font-size:1.1em"><b>3D Bazaar</b></span><br/>Click here to view the <b>immersive 3D bazaar</b> experience.',
       },
       {
         element: '#joyride-add-to-cart-btn',
-        intro: '<span style="font-size:1.1em">🛒 <b>Add to Cart</b></span><br/>Add products to your cart using this button.',
+        intro: '<span style="font-size:1.1em"><b>Add to Cart</b></span><br/>Add products to your cart using this button.',
 
       },
       {
         element: '#joyride-wishlist-btn',
-        intro: '<span style="font-size:1.1em">💜 <b>Wishlist</b></span><br/>Add products to your wishlist using this button.',
+        intro: '<span style="font-size:1.1em"><b>Wishlist</b></span><br/>Add products to your wishlist using this button.',
       },
       {
         element: '#joyride-ar-btn',
-        intro: '<span style="font-size:1.1em">📱 <b>View in AR</b></span><br/>See the product in <b>Augmented Reality</b> using this button.',
+        intro: '<span style="font-size:1.1em"><b>View in AR</b></span><br/>See the product in <b>Augmented Reality</b> using this button.',
       },
       {
         element: '#joyride-speaker-btn',
-        intro: '<span style="font-size:1.1em">🔊 <b>Listen</b></span><br/>Hear the product story using this speaker button.',
+        intro: '<span style="font-size:1.1em"><b>Listen</b></span><br/>Hear the product story using this speaker button.',
       },
     ];
   };
@@ -156,7 +156,7 @@ function MarketplaceContent() {
               highlightClass: 'artisync-intro-highlight',
               nextLabel: 'Next →',
               prevLabel: '← Back',
-              doneLabel: '✨ Done',
+              doneLabel: 'Done',
               skipLabel: 'Skip',
             });
             intro.onchange(function (targetElement) {
@@ -451,98 +451,39 @@ function MarketplaceContent() {
 
   const fetchProducts = async () => {
     try {
-      // fetch active/scheduled auctions to exclude their products from normal listing
+      // Use mock auction IDs so auctioned products are excluded
+      const { MOCK_AUCTIONS, MOCK_PRODUCTS, getHandicraftImageByCategory } = await import('@/lib/mockData')
+      setAuctionedProductIds(MOCK_AUCTIONS.filter(a => a.status === 'running').map(a => a.product_id))
+
+      // Try Supabase first, fall back to mock data
+      let enrichedProducts: Product[] = []
       try {
-        const { data: aData } = await supabase
-          .from('auctions')
-          .select('product_id,status,starts_at')
-          .in('status', ['scheduled', 'running'])
-        const ids = (aData || []).map((a: { product_id: string }) => a.product_id)
-        setAuctionedProductIds(ids)
-      } catch (err) {
-        console.error('Error fetching auctions for marketplace:', err)
-        setAuctionedProductIds([])
-      }
-      let query = supabase
-        .from('products')
-        .select(`
-          *,
-          seller:profiles(name)
-        `)
-        .order('created_at', { ascending: false })
-
-      if (auctionedProductIds.length > 0) {
-        // exclude auctioned products from normal listing
-        const inList = `(${auctionedProductIds.map((id) => `'${id}'`).join(',')})`
-        query = query.not('id', 'in', inList)
+        const { data, error } = await supabase
+          .from('products')
+          .select('*, seller:profiles(name)')
+          .order('created_at', { ascending: false })
+        if (error || !data || data.length === 0) throw new Error('no data')
+        enrichedProducts = data.map((p: any) => ({ ...p, isCollaborative: false, collaborators: [] }))
+      } catch {
+        // Fall back to mock products
+        enrichedProducts = MOCK_PRODUCTS.map(p => ({ ...p, isCollaborative: false, collaborators: [] })) as unknown as Product[]
       }
 
-      const { data, error } = await query
-
-      if (error) throw error
-
-      // Fetch collaborative products to enrich the data
-      const { data: collabData } = await supabase
-        .from('collaborative_products')
-        .select(`
-          product_id,
-          collaboration:collaborations(
-            id,
-            initiator_id,
-            partner_id,
-            status,
-            initiator:profiles!collaborations_initiator_id_fkey(id, name),
-            partner:profiles!collaborations_partner_id_fkey(id, name)
-          )
-        `)
-        .eq('collaboration.status', 'accepted')
-
-      // Create a map of product_id -> collaborators
-      const collabMap = new Map<string, { id: string, name: string }[]>()
-      // Helper: extract name from either an object or an array of objects returned by Supabase joins
-      const extractName = (val?: { name?: string } | { name?: string }[] | null) => {
-        if (!val) return undefined
-        if (Array.isArray(val)) return val[0]?.name
-        return val.name
-      }
-
-      collabData?.forEach((cp: CollabJoin) => {
-        const rawCollab = cp.collaboration
-        if (!rawCollab) return
-
-        // Normalize arrays to a single object if Supabase returned an array
-        const collObj = Array.isArray(rawCollab) ? rawCollab[0] : rawCollab
-
-        const initiatorName = extractName(collObj.initiator)
-        const partnerName = extractName(collObj.partner)
-
-        const collaborators = [
-          { id: collObj.initiator_id, name: initiatorName || 'Unknown' },
-          { id: collObj.partner_id, name: partnerName || 'Unknown' }
-        ]
-
-        collabMap.set(cp.product_id, collaborators)
-      })
-
-      // Enrich products with collaboration info
-      const enrichedProducts = (data || []).map(product => ({
-        ...product,
-        isCollaborative: collabMap.has(product.id),
-        collaborators: collabMap.get(product.id) || []
+      const themedProducts = enrichedProducts.map((p, idx) => ({
+        ...p,
+        image_url: getHandicraftImageByCategory(p.category || '', idx),
       }))
 
-      setProducts(enrichedProducts)
-
-      // Extract unique categories
-      const uniqueCategories = [...new Set(enrichedProducts?.map(p => p.category) || [])]
+      setProducts(themedProducts)
+      const uniqueCategories = [...new Set(themedProducts.map(p => p.category).filter(Boolean))] as string[]
       setCategories(uniqueCategories)
-
       setLoading(false)
     } catch (error) {
       console.error('Error fetching products:', error)
       setLoading(false)
     }
   }
+
 
   const filterProducts = async () => {
     // If there's a search term, use semantic search
@@ -976,14 +917,14 @@ function MarketplaceContent() {
             <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl" onClick={() => setCartModalOpen(false)}>&times;</button>
             {cartStatus === 'success' ? (
               <>
-                <div className="text-6xl mb-4">🛒</div>
+                <ShoppingCart className="w-16 h-16 mb-4 text-[var(--muted)]" />
                 <h2 className="text-2xl font-bold text-green-600 mb-2">{t('cart.addedSuccessTitle') || 'Added to Cart!'}</h2>
                 <p className="text-gray-700 mb-6">{cartMessage}</p>
                 <Link href="/cart" className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-200 shadow-lg hover:shadow-xl text-center">{t('cart.viewCart')}</Link>
               </>
             ) : (
               <>
-                <div className="text-6xl mb-4">⚠️</div>
+                <Warning className="w-16 h-16 mb-4 text-amber-500" />
                 <h2 className="text-2xl font-bold text-red-600 mb-2">{t('cart.addedErrorTitle') || 'Could not add to Cart'}</h2>
                 <p className="text-gray-700 mb-6">{cartMessage}</p>
                 <button onClick={() => setCartModalOpen(false)} className="w-full px-6 py-3 bg-gradient-to-r from-gray-300 to-gray-400 text-gray-700 font-semibold rounded-xl hover:from-gray-400 hover:to-gray-500 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-200 shadow-lg hover:shadow-xl">{t('cart.close')}</button>
@@ -1039,7 +980,7 @@ function MarketplaceContent() {
         >
           {/* AI Helper Text */}
           <div className="mb-4 flex items-center justify-center gap-2 text-sm text-gray-600">
-            <Sparkles className="w-4 h-4 text-orange-500" />
+            <Sparkle className="w-4 h-4 text-orange-500" />
             <span>{t('marketplace.aiHelperText')}</span>
             <span className="text-gray-400">{t('marketplace.aiHelperHint')}</span>
           </div>
@@ -1106,7 +1047,7 @@ function MarketplaceContent() {
               `}
               onClick={() => setSearchTerm(searchTerm === 'gift item' ? '' : 'gift item')}
             >
-              🎁 {t('marketplace.giftableProducts')}
+              {t('marketplace.giftableProducts')}
             </button>
             <button
               onClick={() => setShowCollaborativeOnly(!showCollaborativeOnly)}
@@ -1161,19 +1102,19 @@ function MarketplaceContent() {
                       {product.isCollaborative && product.is_virtual ? (
                         <>
                           <div className="absolute top-2 left-2 z-10 bg-gradient-to-r from-cyan-400 to-teal-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1">
-                            🧩 {t('marketplace.virtualBadge')}
+                            <Cube className="w-4 h-4 mr-1" /> {t('marketplace.virtualBadge')}
                           </div>
                           <div className="absolute top-10 left-2 z-10 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                            🤝 {t('marketplace.collabBadge')}
+                            <Handshake className="w-4 h-4 mr-1" /> {t('marketplace.collabBadge')}
                           </div>
                         </>
                       ) : product.isCollaborative ? (
                         <div className="absolute top-2 right-2 z-10 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                          🤝 {t('marketplace.collabBadge')}
+                          <Handshake className="w-4 h-4 mr-1" /> {t('marketplace.collabBadge')}
                         </div>
                       ) : product.is_virtual ? (
                         <div className="absolute top-2 left-2 z-10 bg-gradient-to-r from-cyan-400 to-teal-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1">
-                          🧩 {t('marketplace.virtualBadge')}
+                          <Cube className="w-4 h-4 mr-1" /> {t('marketplace.virtualBadge')}
                         </div>
                       ) : null}
                       {product.image_url ? (
@@ -1187,8 +1128,8 @@ function MarketplaceContent() {
                           ? 'from-yellow-100 to-orange-100'
                           : 'from-orange-100 to-red-100'
                           }`}>
-                          <span className={`text-4xl ${product.isCollaborative ? 'text-yellow-500' : 'text-orange-400'
-                            }`}>🎨</span>
+                          <Palette className={`w-10 h-10 ${product.isCollaborative ? 'text-yellow-500' : 'text-orange-400'
+                            }`} />
                         </div>
                       )}
                     </div>
@@ -1203,7 +1144,7 @@ function MarketplaceContent() {
                     {/* Show collaborators or single seller */}
                     {product.isCollaborative && product.collaborators && product.collaborators.length > 0 ? (
                       <div className="text-xs mb-3 p-3 rounded-md border border-yellow-200/90 dark:border-yellow-700/30 shadow-sm">
-                        <p className="font-medium mb-1 text-yellow-800 dark:text-gray-300">🤝 Collaboration by:</p>
+                        <p className="font-medium mb-1 text-yellow-800 dark:text-gray-300 flex items-center"><Handshake className="w-4 h-4 mr-2" /> Collaboration by:</p>
                         <div className="space-y-0.5">
                           {product.collaborators.map((collab) => (
                             <p key={collab.id} className="text-yellow-800 dark:text-yellow-400 font-semibold truncate">
@@ -1278,7 +1219,7 @@ function MarketplaceContent() {
                           className="group relative p-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full hover:from-green-200 hover:to-emerald-200 transition-all duration-200 shadow-sm hover:shadow-md"
                           title={t('marketplace.viewInAR')}
                         >
-                          <span role="img" aria-label="AR" className="text-lg">📱</span>
+                          <DeviceMobile className="w-5 h-5" />
                           {/* Tooltip */}
                           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
                             {t('marketplace.viewInAR')}
@@ -1334,7 +1275,7 @@ function MarketplaceContent() {
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
-                          <span className="text-orange-400 text-4xl">🎨</span>
+                          <Palette className="w-10 h-10 text-orange-400" />
                         </div>
                       )}
                     </div>

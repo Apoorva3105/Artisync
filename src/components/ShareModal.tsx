@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share2 } from 'lucide-react';
+import { Share as Share2, X } from '@phosphor-icons/react';
 
 interface ShareModalProps {
   open: boolean;
@@ -31,7 +31,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ open, onClose, shareUrl,
             <Share2 className="w-4 h-4 md:w-5 md:h-5 mr-2 text-[var(--heritage-gold)]" />
             {t('profile.share')} {getShareTitle()}
           </h3>
-          <button type="button" onClick={onClose} className="text-[var(--muted)] hover:text-[var(--heritage-red)] transition-colors text-lg md:text-xl p-1 rounded-full hover:bg-[var(--bg-2)]">✕</button>
+          <button type="button" onClick={onClose} className="text-[var(--muted)] hover:text-[var(--heritage-red)] transition-colors text-lg md:text-xl p-1 rounded-full hover:bg-[var(--bg-2)]"><X className="w-5 h-5" /></button>
         </div>
         <div className="space-y-4">
           <div className="p-3 bg-[var(--bg-2)] rounded-lg border border-[var(--border),_theme(colors.gray.200)]">

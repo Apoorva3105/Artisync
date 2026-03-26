@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X } from '@phosphor-icons/react';
 import ThreeDStall from './ThreeDStall';
 import MarketplaceNavigator3D from './MarketplaceNavigator3D';
 import { Product } from '../types/product';
@@ -59,5 +59,4 @@ export default function MarketplaceStalls3D({ isOpen, onClose, sellers, onAddToC
     </div>
   );
 }
-
 

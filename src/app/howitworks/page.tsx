@@ -1,5 +1,6 @@
 'use client';
 import { useTranslation } from 'react-i18next';
+import { Sparkle, Shield } from '@phosphor-icons/react'
 
 export default function HowItWorksPage() {
   const { t } = useTranslation();
@@ -61,7 +62,7 @@ export default function HowItWorksPage() {
             <h3 className="text-xl font-serif font-bold text-[var(--heritage-brown)] mb-4">{t('howItWorksPage.aiSection.title')}</h3>
             <ul className="space-y-2 text-[var(--muted)]">
               {(t('howItWorksPage.aiSection.features', { returnObjects: true }) as string[]).map((feature, i) => (
-                <li key={i} className="flex items-center"><span className="text-[var(--heritage-gold)] mr-2">✦</span> {feature}</li>
+                <li key={i} className="flex items-center"><Sparkle weight="fill" className="text-[var(--heritage-gold)] mr-2" /> {feature}</li>
               ))}
             </ul>
           </div>
@@ -70,7 +71,7 @@ export default function HowItWorksPage() {
             <h3 className="text-xl font-serif font-bold text-[var(--heritage-brown)] mb-4">{t('howItWorksPage.safetySection.title')}</h3>
             <ul className="space-y-2 text-[var(--muted)]">
               {(t('howItWorksPage.safetySection.features', { returnObjects: true }) as string[]).map((feature, i) => (
-                <li key={i} className="flex items-center"><span className="text-[var(--success)] mr-2">🛡️</span> {feature}</li>
+                <li key={i} className="flex items-center"><Shield weight="fill" className="text-[var(--success)] mr-2" /> {feature}</li>
               ))}
             </ul>
           </div>

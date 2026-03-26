@@ -6,7 +6,7 @@ import { translateArray } from '@/lib/translate'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Clock, Hammer, ExternalLink } from 'lucide-react'
+import { Clock, Hammer, ArrowSquareOut as ExternalLink } from '@phosphor-icons/react'
 
 type Bid = {
   amount: number
@@ -23,20 +23,14 @@ type AuctionRow = {
   bids?: Bid[]
 }
 
+import { MOCK_AUCTIONS } from '@/lib/mockData'
+
 async function fetchAuctions() {
-  const { data, error } = await supabase
-    .from('auctions')
-    .select('*, product:products(title, image_url, price), bids(amount)')
-    .order('created_at', { ascending: false })
-  if (error) throw error
-
-  // Sort bids for each auction to find the highest
-  const processed = data?.map(a => ({
+  // Sort bids descending for each auction
+  return MOCK_AUCTIONS.map(a => ({
     ...a,
-    bids: a.bids?.sort((b1: Bid, b2: Bid) => b2.amount - b1.amount) || []
-  })) || []
-
-  return processed
+    bids: [...(a.bids || [])].sort((b1, b2) => b2.amount - b1.amount),
+  }))
 }
 
 

@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
       'images.unsplash.com',
       'cdn.shopify.com',
       'i.imgur.com',
+      'commons.wikimedia.org',
       'upload.wikimedia.org', // allow Wikimedia images
       // Supabase storage host used in product images
       'dejyoyoctsfyjixfhfgd.supabase.co',

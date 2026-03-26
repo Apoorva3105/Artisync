@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Palette, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, Palette, Sparkle as Sparkles } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
 interface StallCustomizationModalProps {

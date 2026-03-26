@@ -5,14 +5,14 @@ import { useAuth } from '../../contexts/AuthContext'
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'next/navigation'
 import {
-  User, Edit3, Camera, MapPin, Package, Heart, Settings,
-  LogOut, ShoppingBag, Truck, CreditCard, Bell, Shield,
-  ChevronRight, Calendar, Mail, Phone, Home, Plus, Trash2,
-  CheckCircle, AlertCircle, Search, Filter, X, LayoutDashboard, MessageCircle, Menu
-} from 'lucide-react'
+  User, PencilSimple as Edit3, Camera, MapPin, Package, Heart, GearSix as Settings,
+  SignOut as LogOut, ShoppingBag, Truck, CreditCard, Bell, Shield,
+  CaretRight as ChevronRight, Calendar, EnvelopeSimple as Mail, Phone, House as Home, Plus, Trash,
+  CheckCircle, WarningCircle as AlertCircle, MagnifyingGlass as Search, Funnel as Filter, X, SquaresFour as LayoutDashboard, ChatCircle as MessageCircle, List as Menu
+} from '@phosphor-icons/react'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 
 // --- Types ---
 type Tab = 'overview' | 'orders' | 'wishlist' | 'addresses' | 'settings' | 'notifications' | 'messages'
@@ -670,7 +670,7 @@ export default function ProfilePage() {
                           </div>
                           <div className="flex gap-2">
                             <button className="p-1.5 hover:bg-[var(--bg-2)] rounded transition-colors" title="Edit"><Edit3 className="w-4 h-4 text-[var(--muted)]" /></button>
-                            <button onClick={() => handleDeleteAddress(addr.id)} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/10 rounded transition-colors" title="Delete"><Trash2 className="w-4 h-4 text-red-500" /></button>
+                            <button onClick={() => handleDeleteAddress(addr.id)} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/10 rounded transition-colors" title="Delete"><Trash className="w-4 h-4 text-red-500" /></button>
                           </div>
                         </div>
                         <h4 className="font-bold text-lg mb-1">{addr.name}</h4>

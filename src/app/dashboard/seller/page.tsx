@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
-import { motion } from 'framer-motion'
-import { Edit, Trash2, Eye, Palette, LogOut, Sparkles } from 'lucide-react'
+import { motion } from 'motion/react'
+import { PencilSimple as Edit, Trash, Eye, Palette, SignOut as LogOut, Sparkle, Sparkle as Sparkles, ChartBar, Handshake, Bank, Gift, Phone, X, Check, Cube, Hammer, CurrencyInr, Calendar, RocketLaunch, Lightning } from '@phosphor-icons/react'
 import { supabase } from '@/lib/supabase'
 import { Database } from '@/lib/supabase'
 import { extractImageFeatures } from '@/lib/image-similarity'
@@ -53,7 +53,7 @@ export default function SellerDashboard() {
   const getTourSteps = (): TourStep[] => [
     {
       element: '#seller-dashboard-header',
-      intro: '<span style="font-size:1.2em">👋 <b>Welcome Seller!</b></span><br/>This is your dashboard where you manage products, analytics, and more.',
+      intro: '<span style="font-size:1.2em"><b>Welcome Seller!</b></span><br/>This is your dashboard where you manage products, analytics, and more.',
     },
     {
       element: '#seller-dashboard-tabs',
@@ -123,7 +123,7 @@ export default function SellerDashboard() {
                   highlightClass: 'artisync-intro-highlight',
                   nextLabel: 'Next →',
                   prevLabel: '← Back',
-                  doneLabel: '✨ Done',
+                  doneLabel: 'Done',
                   skipLabel: 'Skip',
                 });
                 // Custom scroll handler for mobile
@@ -1054,7 +1054,7 @@ export default function SellerDashboard() {
                 : 'bg-[var(--bg-2)] text-[var(--muted)] hover:text-[var(--text)]'
                 }`}
             >
-              <span>📊</span>
+              <ChartBar className="w-5 h-5" />
               <span>{t('seller.analytics') || 'Analytics'}</span>
             </button>
             {/* Collaborations Tab */}
@@ -1065,7 +1065,7 @@ export default function SellerDashboard() {
                 : 'bg-[var(--bg-2)] text-[var(--muted)] hover:text-[var(--text)]'
                 }`}
             >
-              <span>🤝</span>
+              <Handshake className="w-5 h-5" />
               <span>{t('collaboration.title') || 'Collaborations'}</span>
             </button>
             {/* Scheme Connect Tab */}
@@ -1078,7 +1078,7 @@ export default function SellerDashboard() {
               // Hide on mobile, show on sm and up
               style={{ display: 'none', ...(window.innerWidth >= 640 ? { display: 'flex' } : {}) }}
             >
-              <span>🏛️</span>
+              <Bank className="w-5 h-5" />
               <span>{t('seller.schemeConnectTab')}</span>
             </button>
             {/* Custom Requests tab: only show inline on desktop (sm and up) */}
@@ -1102,7 +1102,7 @@ export default function SellerDashboard() {
                 : 'bg-[var(--bg-2)] text-[var(--muted)] hover:text-[var(--text)]'
                 }`}
             >
-              <span>🏛️</span>
+              <Bank className="w-5 h-5" />
               <span>{t('seller.schemeConnectTab')}</span>
             </button>
             <button
@@ -1127,7 +1127,7 @@ export default function SellerDashboard() {
             className="card-glass rounded-xl p-6 mb-8 border border-[var(--border)]"
           >
             <h2 className="text-2xl font-semibold text-[var(--text)] mb-4 flex items-center gap-2">
-              <span className="text-green-500 dark:text-blue-400 text-3xl">🏛️</span>
+              <Bank className="w-8 h-8 text-green-500 flex-shrink-0" />
               {t('seller.schemeConnectSectionTitle')}
             </h2>
             <div className="text-[var(--muted)] text-base mb-4">
@@ -1246,7 +1246,7 @@ export default function SellerDashboard() {
                 {donations.filter(donation => donation.status === 'new' && !donation.claimed_by).length > 0 && (
                   <div className="mt-10">
                     <h3 className="text-xl font-bold text-orange-600 mb-4 flex items-center gap-2">
-                      <span>🎁</span> {t('seller.liveDonationsSectionTitle', 'Available Donated Items')}
+                      <Gift className="w-5 h-5 inline mr-2" /> {t('seller.liveDonationsSectionTitle', 'Available Donated Items')}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                       {donations.filter(donation => donation.status === 'new' && !donation.claimed_by).map((donation) => (
@@ -1283,7 +1283,7 @@ export default function SellerDashboard() {
                                     }
                                   }}
                                 >
-                                  📞 {donation.donor_phone ? donation.donor_phone : donation.donor_email}
+                                  <Phone className="w-4 h-4 inline mr-1" />{donation.donor_phone ? donation.donor_phone : donation.donor_email}
                                 </button>
                               )}
                               {/* Mark Claimed button or Claimed message */}
@@ -1292,7 +1292,7 @@ export default function SellerDashboard() {
                                   className="flex items-center justify-center px-3 py-2 text-xs rounded-md bg-gray-200 text-gray-600 font-semibold shadow border border-gray-300 cursor-not-allowed select-none"
                                   title="This donation has already been claimed by a seller. The product is not available."
                                 >
-                                  ❌ {t('seller.donationAlreadyClaimed', 'Already Claimed')}
+                                  <X className="w-4 h-4 inline mr-1" />{t('seller.donationAlreadyClaimed', 'Already Claimed')}
                                 </span>
                               ) : (
                                 <button
@@ -1301,7 +1301,7 @@ export default function SellerDashboard() {
                                   disabled={customRequestsLoading}
                                   title="If you have claimed this item, mark as claimed. The product will not be available to others."
                                 >
-                                  ✅ {t('seller.donationMarkClaimed', 'Mark Claimed')}
+                                  <Check className="w-4 h-4 inline mr-1" />{t('seller.donationMarkClaimed', 'Mark Claimed')}
                                 </button>
                               )}
                             </div>
@@ -1359,7 +1359,7 @@ export default function SellerDashboard() {
                 <div className="rounded-xl bg-transparent p-5 shadow-md flex flex-col gap-3">
                   <div className="flex items-center gap-3 mb-1">
                     <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-500 shadow-lg">
-                      <span className="text-2xl">🧩</span>
+                      <Cube className="w-6 h-6 mr-2" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{t('seller.virtualProductManagement')}</h3>
                   </div>
@@ -1368,7 +1368,7 @@ export default function SellerDashboard() {
                     onClick={() => setShowVirtualProductForm(true)}
                     className="w-full flex items-center justify-center px-5 py-3 text-base font-bold bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 text-white rounded-lg hover:from-cyan-600 hover:via-teal-600 hover:to-blue-600 shadow-lg transition-all duration-200"
                   >
-                    <span className="text-xl mr-2 animate-pulse">🧩</span>
+                    <Cube className="w-5 h-5 mr-2 animate-pulse" />
                     {t('seller.addVirtualProduct')}
                   </button>
                   <div className="text-xs text-gray-600 text-center mt-2">{t('seller.virtualProductHint')}</div>
@@ -1500,7 +1500,7 @@ export default function SellerDashboard() {
                 <div className="relative p-4 sm:p-6 lg:p-8">
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 shadow-lg">
-                      <span className="text-2xl sm:text-3xl">🔨</span>
+                      <Hammer className="w-6 h-6 mr-2 text-rose-500" />
                     </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-[var(--text)]">{t('seller.auctionCreateTitle')}</h3>
@@ -1534,7 +1534,7 @@ export default function SellerDashboard() {
                       <div className="lg:col-span-2">
                         <label className="block text-sm sm:text-base font-semibold text-gray-900 dark:text-[var(--text)] mb-2">
                           <span className="inline-flex items-center gap-2">
-                            🎨 {t('seller.auctionSelectProduct')}
+                            <Palette className="w-4 h-4 inline mr-1" />{t('seller.auctionSelectProduct')}
                           </span>
                         </label>
                         <select
@@ -1553,7 +1553,7 @@ export default function SellerDashboard() {
                       <div>
                         <label className="block text-sm sm:text-base font-semibold text-gray-900 dark:text-[var(--text)] mb-2">
                           <span className="inline-flex items-center gap-2">
-                            💰 {t('seller.auctionStartingPrice')}
+                            <CurrencyInr className="w-4 h-4 inline mr-1" />{t('seller.auctionStartingPrice')}
                           </span>
                         </label>
                         <div className="relative">
@@ -1572,7 +1572,7 @@ export default function SellerDashboard() {
                       <div>
                         <label className="block text-sm sm:text-base font-semibold text-gray-900 dark:text-[var(--text)] mb-2">
                           <span className="inline-flex items-center gap-2">
-                            📅 {t('seller.auctionSchedule')}
+                            <Calendar className="w-4 h-4 inline mr-1" />{t('seller.auctionSchedule')}
                           </span>
                         </label>
                         <div className="grid grid-cols-2 gap-3">
@@ -1604,7 +1604,7 @@ export default function SellerDashboard() {
                         className="w-full sm:w-auto px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:via-indigo-700 hover:to-blue-700 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                       >
                         <span className="inline-flex items-center gap-2">
-                          <span>🚀</span>
+                          <RocketLaunch className="w-4 h-4 inline" />
                           <span>{t('seller.auctionLaunchButton')}</span>
                         </span>
                       </button>
@@ -1619,7 +1619,7 @@ export default function SellerDashboard() {
                 <div className="relative p-4 sm:p-6 lg:p-8">
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg">
-                      <span className="text-2xl sm:text-3xl">⚡</span>
+                      <Lightning className="w-6 h-6 mr-2 text-yellow-500 animate-pulse" />
                     </div>
                     <div>
                       <h3 id="your-active-auctions-text" className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-[var(--text)]">{t('seller.auctionActiveTitle')}</h3>
@@ -1708,7 +1708,7 @@ export default function SellerDashboard() {
                           onClick={() => handleDeleteProduct(product.id)}
                           className="flex-1 flex items-center justify-center px-3 py-2 text-xs sm:text-sm border border-red-300 rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors"
                         >
-                          <Trash2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                          <Trash className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                           {t('common.delete')}
                         </button>
                       </div>

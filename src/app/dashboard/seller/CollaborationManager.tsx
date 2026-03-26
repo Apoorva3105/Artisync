@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import MessageInputModal from '@/components/MessageInputModal'
 import { useTranslation } from 'react-i18next'
 import { 
@@ -10,14 +10,14 @@ import {
   Check, 
   X, 
   Clock, 
-  AlertCircle,
+  WarningCircle as AlertCircle,
   Package,
-  TrendingUp,
-  MessageSquare,
+  TrendUp as TrendingUp,
+  ChatCenteredText as MessageSquare,
   ArrowRight,
-  Search,
-  Loader2
-} from 'lucide-react'
+  MagnifyingGlass as Search,
+  CircleNotch
+} from '@phosphor-icons/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Database } from '@/lib/supabase'
@@ -209,7 +209,7 @@ export default function CollaborationManager({ userId, userName }: Props) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-yellow-600" />
+            <CircleNotch className="h-8 w-8 animate-spin text-yellow-600" />
       </div>
     )
   }
@@ -304,7 +304,7 @@ export default function CollaborationManager({ userId, userName }: Props) {
                 disabled={searching}
                 className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 text-sm sm:text-base"
               >
-                {searching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+                {searching ? <CircleNotch className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
                 {t('common.search') || 'Search'}
               </button>
             </div>
@@ -459,7 +459,7 @@ function SellerCard({ seller, onSendRequest, loading }: { seller: Seller; onSend
         className="w-full mt-3 sm:mt-4 px-3 sm:px-4 py-2 text-sm sm:text-base bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
       >
         {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
+                <CircleNotch className="h-4 w-4 animate-spin" />
         ) : (
           <>
             <UserPlus className="h-4 w-4" />
@@ -592,7 +592,7 @@ function CollaborationCard({ collaboration, currentTab, onAccept, onReject, onEn
               disabled={loading}
               className="flex-1 px-3 sm:px-4 py-2 text-sm sm:text-base bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
+              {loading ? <CircleNotch className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
               {t('collaboration.accept') || 'Accept'}
             </button>
             <button

@@ -2,10 +2,10 @@
 import { useRef } from 'react'
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useAuth } from '@/contexts/AuthContext'
 import { logActivity } from '@/lib/activity'
-import { ShoppingCart, Heart, ArrowLeft, Star, User, Sparkles } from 'lucide-react'
+import { ShoppingCart, Heart, ArrowLeft, Star, User, Sparkle, Handshake, ImageSquare, Gift, Users, Confetti, Cube, DeviceMobile } from '@phosphor-icons/react'
 import GroupGiftModal from '@/components/GroupGiftModal'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
@@ -542,12 +542,12 @@ export default function ProductDetail() {
               <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
                 {product.isCollaborative && (
                   <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm border border-amber-200">
-                    🤝 Collaborative
+                    <span className="flex items-center"><Handshake className="mr-2" /> Collaborative</span>
                   </span>
                 )}
                 {product.is_virtual && (
                   <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm border border-blue-200">
-                    🧩 Virtual Asset
+                    <span className="flex items-center"><Cube className="mr-2" /> Virtual Asset</span>
                   </span>
                 )}
               </div>
@@ -562,7 +562,7 @@ export default function ProductDetail() {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                  <span className="text-6xl text-gray-300">🖼️</span>
+                  <ImageSquare className="w-16 h-16 text-gray-300" />
                 </div>
               )}
 
@@ -577,7 +577,7 @@ export default function ProductDetail() {
                 title="View in AR"
               >
                 <div className="relative">
-                  <span className="text-xl">📱</span>
+                  <DeviceMobile className="w-6 h-6" />
                   <span className="absolute -top-1 -right-1 flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
@@ -599,11 +599,11 @@ export default function ProductDetail() {
                   {/* Decorative Header */}
                   <div className="flex items-center justify-center gap-4 mb-6">
                     <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-[#b08d55]"></div>
-                    <Sparkles className="w-6 h-6 text-[#b08d55]" />
+                    <Sparkle className="w-6 h-6 text-[#b08d55]" />
                     <h3 className="font-serif text-2xl text-[#3d0000] [:root[data-theme=dark]_&]:text-orange-100 tracking-wide">
                       Artisan&apos;s Story
                     </h3>
-                    <Sparkles className="w-6 h-6 text-[#b08d55]" />
+                    <Sparkle className="w-6 h-6 text-[#b08d55]" />
                     <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-[#b08d55]"></div>
                   </div>
 
@@ -738,7 +738,7 @@ export default function ProductDetail() {
                   onClick={() => setGiftModalOpen(true)}
                 >
                   <div className="flex items-center gap-2 relative z-10">
-                    <span role="img" aria-label="gift" className="text-lg group-hover:animate-bounce">🎁</span>
+                    <Gift className="w-5 h-5 group-hover:animate-bounce" />
                     <span className="text-sm tracking-wide uppercase font-bold">{t('product.sendAsGift')}</span>
                   </div>
                 </button>
@@ -750,7 +750,7 @@ export default function ProductDetail() {
                   onClick={() => setCustomRequestModalOpen(true)}
                 >
                   <div className="flex items-center gap-2 relative z-10">
-                    <Sparkles className="w-4 h-4" />
+                        <Sparkle className="w-4 h-4" />
                     <span className="text-sm tracking-wide uppercase font-bold">{t('product.customRequest')}</span>
                   </div>
                 </button>
@@ -789,7 +789,7 @@ export default function ProductDetail() {
                     setIsNarrating(true);
                     utter.onend = () => setIsNarrating(false);
                   }} className="text-orange-600 text-sm font-medium flex items-center gap-2 mt-2 hover:underline">
-                    <Sparkles className="w-4 h-4" />
+                     <Sparkle className="w-4 h-4" />
                     Listen to the Artisan&apos;s Story
                   </button>
                 )}
@@ -814,7 +814,7 @@ export default function ProductDetail() {
                   <span className="w-1 h-8 bg-[#b08d55] rounded-full"></span>
                   <h3 className="text-xl font-serif text-[#3d0000] [:root[data-theme=dark]_&]:text-orange-100">
                     {product.isCollaborative
-                      ? `🤝 ${t('product.meetCollaborativeArtisans')}`
+                      ? `<Handshake className="inline w-4 h-4 mr-1" /> ${t('product.meetCollaborativeArtisans')}`
                       : t('product.meetTheArtisan')
                     }
                   </h3>
@@ -957,7 +957,7 @@ export default function ProductDetail() {
                         }`}
                     >
                       <div className="text-center">
-                        <div className="text-2xl mb-1">🎁</div>
+                        <Gift className="w-8 h-8 mb-1 text-[var(--sapphire)]" />
                         <div className="font-semibold">{t('product.individualGift')}</div>
                         <div className="text-xs text-gray-500">{t('product.individualGiftDesc')}</div>
                       </div>
@@ -970,7 +970,7 @@ export default function ProductDetail() {
                         }`}
                     >
                       <div className="text-center">
-                        <div className="text-2xl mb-1">👥</div>
+                        <Users className="w-8 h-8 mb-1 text-[var(--sapphire)]" />
                         <div className="font-semibold">{t('product.groupGift')}</div>
                         <div className="text-xs text-gray-500">{t('product.groupGiftDesc')}</div>
                       </div>
@@ -983,7 +983,7 @@ export default function ProductDetail() {
                   <>
                     {giftSuccess ? (
                       <div className="text-center py-8">
-                        <div className="text-6xl mb-4">🎉</div>
+                        <Confetti className="w-16 h-16 mb-4 text-[var(--saffron)]" />
                         <h3 className="text-2xl font-bold text-green-600 mb-2">{t('product.giftSuccessTitle')}</h3>
                         <p className="text-gray-600 mb-6">{t('product.giftSuccessDesc', { name: selectedRecipient?.name })}</p>
                         <button
@@ -1066,7 +1066,7 @@ export default function ProductDetail() {
                   </>
                 ) : (
                   <div className="text-center py-8">
-                    <div className="text-6xl mb-4">👥</div>
+                    <Users className="w-16 h-16 mb-4 text-[var(--sapphire)]" />
                     <h3 className="text-xl font-bold text-purple-700 mb-2">{t('product.groupGiftTitle')}</h3>
                     <p className="text-gray-600 mb-6">{t('product.groupGiftDesc')}</p>
                     <button
@@ -1106,7 +1106,7 @@ export default function ProductDetail() {
                 {customRequestError && <div className="mb-2 text-teal-700 bg-teal-100 border border-teal-300 rounded px-3 py-2 text-sm">{customRequestError}</div>}
                 {customRequestSuccess ? (
                   <div className="text-center py-8">
-                    <div className="text-6xl mb-4">🎉</div>
+                    <Confetti className="w-16 h-16 mb-4 text-[var(--saffron)]" />
                     <h3 className="text-2xl font-bold text-green-600 mb-2">Request Sent!</h3>
                     <p className="text-gray-600 mb-2">Your custom craft request has been sent to the seller.</p>
                     <p className="text-teal-700 bg-teal-50 border border-teal-200 rounded px-3 py-2 text-sm mb-4">The seller will reach out to you through DM (Direct Message) for further details and updates.</p>
@@ -1247,7 +1247,7 @@ export default function ProductDetail() {
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                         />
                       ) : (
-                        <div className="flex items-center justify-center h-full text-gray-400 text-3xl">🖼️</div>
+                        <div className="flex items-center justify-center h-full text-gray-400"><ImageSquare className="w-8 h-8" /></div>
                       )}
                       {/* Overlay */}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
@@ -1293,7 +1293,7 @@ export default function ProductDetail() {
 
               <div className="text-center">
                 <div className="text-6xl mb-4 animate-bounce">
-                  {cartModalStatus === 'success' ? '✅' : '❌'}
+                  {cartModalStatus === 'success' ? 'Success' : 'Failed'}
                 </div>
                 <h3 className={`text-2xl font-bold mb-2 ${
                   cartModalStatus === 'success'

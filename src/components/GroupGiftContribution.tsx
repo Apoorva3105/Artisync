@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Heart, Users, DollarSign, Gift, User } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Heart, Users, CurrencyDollar as DollarSign, Gift, User } from '@phosphor-icons/react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
 import { useTranslation } from 'react-i18next';
@@ -282,7 +282,7 @@ export default function GroupGiftContribution({ groupGiftId }: GroupGiftContribu
       
       setContributionAmount(0)
       setContributionMessage('')
-      alert('Thank you for your contribution! 🎉')
+      alert('Thank you for your contribution!')
     } catch (err) {
       console.error('Error contributing:', err)
       alert('Failed to contribute. Please try again.')
@@ -359,7 +359,7 @@ export default function GroupGiftContribution({ groupGiftId }: GroupGiftContribu
 
         {groupGift.status === 'completed' ? (
           <div className="text-center py-4">
-            <div className="text-4xl mb-2">🎉</div>
+            <Gift className="w-10 h-10 mb-2 text-purple-500 mx-auto" />
             <p className="text-lg font-semibold text-green-600">{t('groupGiftModal.progressTargetReached')}</p>
             <p className="text-gray-600 dark:text-gray-400">{t('groupGiftModal.progressReady')}</p>
           </div>

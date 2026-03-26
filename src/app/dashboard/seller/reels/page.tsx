@@ -35,7 +35,7 @@ export interface ReelComment {
 
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
-import { Trash2, Video } from 'lucide-react';
+import { Trash, Video, Pencil } from '@phosphor-icons/react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -455,13 +455,13 @@ export default function SellerReelsPage() {
                     className="flex items-center gap-1 text-purple-600 hover:text-purple-800"
                     onClick={() => openEditModal(reel)}
                   >
-                    ✏️ Edit
+                    <Pencil className="w-4 h-4 inline mr-1" /> Edit
                   </button>
                   <button
                     className="flex items-center gap-1 text-red-600 hover:text-red-800"
                     onClick={() => handleDelete(reel.id)}
                   >
-                    <Trash2 className="w-5 h-5" /> {t('reels.delete')}
+                     <Trash className="w-5 h-5" /> {t('reels.delete')}
                   </button>
                 </div>
                       {/* Edit Reel Modal */}
@@ -537,7 +537,7 @@ export default function SellerReelsPage() {
                             className="text-red-600 hover:text-red-800 ml-2"
                             onClick={() => handleDeleteComment(comment.id, reel.id)}
                           >
-                            <Trash2 className="w-4 h-4" />
+                             <Trash className="w-4 h-4" />
                           </button>
                         </li>
                       ))}

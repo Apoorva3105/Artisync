@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Sans, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -9,7 +9,19 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import AIChatConditional from '@/components/AIChatConditional'
 
-const inter = Inter({ subsets: ['latin'] })
+const dmSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+const playfair = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Artisync',
@@ -22,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${playfair.variable}`}>
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
@@ -47,12 +59,12 @@ export default function RootLayout({
         <meta property="profile:profile_link" content="https://www.artisync.com" />
         <link rel="canonical" href="https://artisync.vercel.app" />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={dmSans.className} suppressHydrationWarning>
         <AuthProvider>
           <LanguageProvider>
             <ThemeProvider>
               <Navbar />
-              <main className="min-h-screen bg-[var(--bg-1)]">
+              <main className="min-h-screen bg-[var(--bg-1)] text-[var(--text)]">
                 {children}
               </main>
               <Footer />

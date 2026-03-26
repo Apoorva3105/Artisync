@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 // translations not currently used in this component
-import { DollarSign, X, TrendingUp, AlertCircle, Check, Clock, XCircle, Loader2 } from 'lucide-react'
+import { CurrencyDollar as DollarSign, X, TrendUp as TrendingUp, WarningCircle as AlertCircle, Check, Clock, XCircle, CircleNotch } from '@phosphor-icons/react'
 // supabase not used in this component; API calls use fetch to server routes
 
 interface RevenueSplitManagerProps {
@@ -238,7 +238,7 @@ export default function RevenueSplitManager({
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin text-yellow-600" />
+            <CircleNotch className="h-8 w-8 animate-spin text-yellow-600" />
           </div>
         ) : (
           <div className="space-y-6">
@@ -444,7 +444,7 @@ export default function RevenueSplitManager({
                     >
                       {submitting ? (
                         <>
-                          <Loader2 className="h-4 w-4 animate-spin" />
+                            <CircleNotch className="h-4 w-4 animate-spin" />
                           Submitting...
                         </>
                       ) : (

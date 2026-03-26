@@ -31,6 +31,7 @@ import {
   Vector3
 } from 'three';
 import { Texture } from 'three';
+import { ArrowsClockwise, CheckCircle } from '@phosphor-icons/react'
 
 // ARViewer: Markerless AR using WebXR + Three.js
 // Renders a sample cube in AR. Extend to load product models as needed.
@@ -391,7 +392,7 @@ export default function ARViewer({ open, onClose, imageUrl, productType }: { ope
         <div style={{ background: '#222', padding: 32, borderRadius: 18, color: '#fff', minWidth: 320, textAlign: 'center', boxShadow: '0 4px 32px #0008' }}>
           {isProcessingImage || !processedImageUrl ? (
             <>
-              <div style={{ fontSize: 38, marginBottom: 18 }}>🔄</div>
+              <ArrowsClockwise size={38} className="mb-4 animate-spin text-white" />
               <div style={{ marginBottom: 8 }}>
                 Processing product image for AR...
               </div>
@@ -399,7 +400,7 @@ export default function ARViewer({ open, onClose, imageUrl, productType }: { ope
             </>
           ) : (
             <>
-              <div style={{ fontSize: 32, marginBottom: 16 }}>✅</div>
+              <CheckCircle size={32} className="mb-4 text-green-400" />
               <div style={{ marginBottom: 10 }}>Image processed!</div>
               <button
                 onClick={() => setARReady(true)}
@@ -447,7 +448,7 @@ export default function ARViewer({ open, onClose, imageUrl, productType }: { ope
             textAlign: 'center',
           }}
         >
-          <div style={{ marginBottom: 10 }}>🔄</div>
+          <ArrowsClockwise size={24} className="mb-2 text-white animate-spin" />
           <div>Processing image for AR...</div>
         </div>
       )}

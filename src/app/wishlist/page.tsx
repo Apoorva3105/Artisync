@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ShoppingCart, Heart, Trash2, ArrowLeft, Search } from 'lucide-react'
+import { motion } from 'motion/react'
+import { ShoppingCart, Heart, Trash, ArrowLeft, MagnifyingGlass as Search } from '@phosphor-icons/react'
 import { useTranslation } from 'react-i18next'
 import type { Database } from '@/lib/supabase'
 
@@ -152,7 +152,7 @@ export default function WishlistPage() {
                                             className="p-3 bg-white text-red-500 rounded-full shadow-lg hover:scale-110 transition-transform"
                                             title={t('common.remove')}
                                         >
-                                            <Trash2 className="w-5 h-5" />
+                                            <Trash className="w-5 h-5" />
                                         </button>
                                     </div>
                                 </div>

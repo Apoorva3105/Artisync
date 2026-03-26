@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { Package, Plus, X, Loader2, Users, TrendingUp, DollarSign } from 'lucide-react'
+import { Package, Plus, X, CircleNotch as Loader2, Users, TrendUp as TrendingUp, CurrencyDollar as DollarSign } from '@phosphor-icons/react'
 import Image from 'next/image'
 import { supabase, Database } from '@/lib/supabase'
 import RevenueSplitManager from './RevenueSplitManager'
@@ -193,7 +193,7 @@ export default function CollaborativeProductsManager({
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[999]">
       <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-4xl w-full mx-4">
         <div className="flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-yellow-600" />
+            <Loader2 className="h-8 w-8 animate-spin text-yellow-600" />
         </div>
       </div>
     </div>
@@ -425,7 +425,7 @@ export default function CollaborativeProductsManager({
                       >
                             {actionLoading === collabProduct.product.id ? (
                           <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                             <Loader2 className="h-4 w-4 animate-spin" />
                             {t('collaboration.removingProduct') || 'Removing...'}
                           </>
                         ) : (

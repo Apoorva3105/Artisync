@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useAuth } from '@/contexts/AuthContext'
 import { logActivity } from '@/lib/activity'
-import { ArrowLeft, User, Palette, MapPin, Calendar, Users, MessageCircle, Send } from 'lucide-react'
+import { ArrowLeft, User, Palette, MapPin, Calendar, Users, ChatCircle, PaperPlaneRight, Handshake, Cube } from '@phosphor-icons/react'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { Database } from '@/lib/supabase'
@@ -439,7 +439,7 @@ export default function StallPage() {
                   window.location.href = `/dm?userId=${stallProfile.id}`;
                 }}
               >
-                <MessageCircle className="w-5 h-5" />
+              <ChatCircle className="w-5 h-5" />
                 {t('dm.messages')}
               </a>
             )}
@@ -512,7 +512,7 @@ export default function StallPage() {
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
-                          <span className="text-orange-400 text-4xl">🎨</span>
+                          <Palette className="w-10 h-10 text-orange-400" />
                         </div>
                       )}
                     </div>
@@ -545,7 +545,7 @@ export default function StallPage() {
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h2 className="text-2xl font-semibold text-[var(--text)] flex items-center gap-2">
-                  🤝 {t('collaboration.title')}
+                  <Handshake className="w-6 h-6 mr-2" /> {t('collaboration.title')}
                 </h2>
                 <p className="text-sm text-[var(--muted)] mt-1">
                   {t('collaboration.subtitle')}
@@ -569,7 +569,7 @@ export default function StallPage() {
                     <div className="relative h-48 bg-[var(--bg-2)] flex items-center justify-center overflow-hidden">
                       {/* Collaboration Badge */}
                       <div className="absolute top-2 right-2 z-10 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        🤝 Collab
+                        <span className="flex items-center"><Handshake className="w-4 h-4 mr-1" /> Collab</span>
                       </div>
                       
                       {collabProduct.product.image_url ? (
@@ -581,7 +581,7 @@ export default function StallPage() {
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
-                          <span className="text-yellow-500 text-4xl">🎨</span>
+                          <Palette className="w-10 h-10 text-yellow-500" />
                         </div>
                       )}
                     </div>
@@ -627,7 +627,7 @@ export default function StallPage() {
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h2 className="text-2xl font-semibold text-[var(--text)] flex items-center gap-2">
-                  🧩 {t('product.virtualBadge')}
+                  <Cube className="w-4 h-4 mr-1" /> {t('product.virtualBadge')}
                 </h2>
                 <p className="text-sm text-[var(--muted)] mt-1">
                   {t('product.virtualProductManagement', { defaultValue: 'Explore digital, downloadable, or template-based products offered by this artisan.' })}
@@ -651,7 +651,7 @@ export default function StallPage() {
                     <div className="relative h-48 bg-[var(--bg-2)] flex items-center justify-center overflow-hidden">
                       {/* Virtual Product Badge */}
                       <div className="absolute top-2 left-2 z-10 bg-gradient-to-r from-cyan-400 to-teal-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1">
-                        🧩 {t('product.virtualBadge')}
+                        <Cube className="w-4 h-4 mr-1" /> {t('product.virtualBadge')}
                       </div>
                       {product.image_url ? (
                         <Image
@@ -662,7 +662,7 @@ export default function StallPage() {
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-cyan-100 to-teal-100 flex items-center justify-center">
-                          <span className="text-cyan-500 text-4xl">🧩</span>
+                          <Cube className="w-10 h-10 text-cyan-500" />
                         </div>
                       )}
                     </div>
@@ -719,7 +719,7 @@ export default function StallPage() {
           title={`Message ${stallProfile.name || 'User'}`}
         >
           <span className="flex items-center gap-2">
-            <Send className="w-5 h-5" />
+            <PaperPlaneRight className="w-5 h-5" />
             <span className="text-xs font-semibold">Message</span>
           </span>
         </button>

@@ -1,6 +1,7 @@
 'use client';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/components/LanguageProvider';
+import { Envelope, Phone } from '@phosphor-icons/react'
 
 export default function ContactPage() {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ export default function ContactPage() {
                 <h2 className="text-xl font-serif font-semibold text-[var(--heritage-brown)] mb-6 border-b border-[var(--heritage-gold)]/20 pb-2">{t('contact.getInTouch')}</h2>
                 <ul className="space-y-6 text-[var(--muted)]">
                   <li className="flex items-center gap-4 group">
-                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-gold)] to-[var(--heritage-red)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">✉️</span>
+                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-gold)] to-[var(--heritage-red)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform"><Envelope className="w-6 h-6" /></span>
                     <div>
                       <p className="text-xs uppercase tracking-wider font-semibold opacity-70 text-[var(--heritage-brown)]">{t('contact.emailLabel')}</p>
                       <a href="mailto:contact@artisync.com" className="text-[var(--text)] font-medium hover:text-[var(--heritage-red)] transition-colors text-lg">contact@artisync.com</a>
@@ -38,14 +39,14 @@ export default function ContactPage() {
                   </li>
                   
                   <li className="flex items-center gap-4 group">
-                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-red)] to-[var(--heritage-accent)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">📞</span>
+                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-red)] to-[var(--heritage-accent)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform"><Phone className="w-6 h-6" /></span>
                     <div>
                       <p className="text-xs uppercase tracking-wider font-semibold opacity-70 text-[var(--heritage-brown)]">{t('contact.phoneLabel')}</p>
                       <a href="tel:+919616928911" className="text-[var(--text)] font-medium hover:text-[var(--heritage-red)] transition-colors text-lg">+91 9616928911</a>
                     </div>
                   </li>
                   <li className="flex items-center gap-4 group">
-                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-brown)] to-[var(--heritage-gold)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">📞</span>
+                    <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--heritage-brown)] to-[var(--heritage-gold)] flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform"><Phone className="w-6 h-6" /></span>
                     <div>
                       <p className="text-xs uppercase tracking-wider font-semibold opacity-70 text-[var(--heritage-brown)]">{t('contact.phoneLabel')}</p>
                       <a href="tel:+919305343135" className="text-[var(--text)] font-medium hover:text-[var(--heritage-gold)] transition-colors text-lg">+91 9305343135</a>

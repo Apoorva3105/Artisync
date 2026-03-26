@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { motion } from 'framer-motion'
-import { ShoppingCart, Trash2, ArrowLeft, Package, Shield, Heart, Plus } from 'lucide-react'
+import { motion } from 'motion/react'
+import { ShoppingCart, Trash, ArrowLeft, Package, Shield, Heart, Plus } from '@phosphor-icons/react'
 import { supabase } from '@/lib/supabase'
 import { Database } from '@/lib/supabase'
 import Link from 'next/link'

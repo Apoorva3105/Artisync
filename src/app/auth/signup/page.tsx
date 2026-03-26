@@ -5,9 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 import { useTheme } from '@/components/ThemeProvider'
-import { Eye, EyeOff, Palette, ShoppingBag, ArrowRight, Sparkles, Users, Star, Heart } from 'lucide-react'
+import { Eye, EyeSlash as EyeOff, Palette, ShoppingBag, ArrowRight, Sparkle, Users, Star, Heart } from '@phosphor-icons/react'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
+import ArtisyncLogo from '@/components/ArtisyncLogo'
 
 function SignUpContent() {
   const { t } = useTranslation()
@@ -115,7 +116,7 @@ function SignUpContent() {
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
               <div className="relative w-32 h-32 flex items-center justify-center">
-                <Image src="/artisync-symbol.png" alt="Artisync Symbol" fill className="object-contain drop-shadow-lg" />
+                <ArtisyncLogo className="w-full h-full drop-shadow-lg" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-[var(--text)]">{t('auth.branding.kalaMitra')}</h1>
@@ -174,7 +175,7 @@ function SignUpContent() {
             {/* Header */}
             <div className="text-center space-y-4">
               <div className="relative w-24 h-24 mx-auto">
-                <Image src="/artisync-symbol.png" alt="Artisync Symbol" fill className="object-contain" />
+                <ArtisyncLogo className="w-full h-full" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-[var(--text)]">
@@ -408,7 +409,7 @@ function SignUpContent() {
 
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl">
               <p className="text-sm text-blue-600 dark:text-blue-400 flex items-center">
-                <Sparkles className="w-4 h-4 mr-2" />
+                <Sparkle className="w-4 h-4 mr-2" />
                 {t('auth.chooseRoleTip')}
               </p>
             </div>
