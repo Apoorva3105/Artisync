@@ -83,7 +83,7 @@ export default function TermsPage() {
               <div className="text-sm text-[var(--muted)] space-y-1">
                 <p>{t('legal.termsOfService.founderLabel')}: {t('legal.termsOfService.founderName')}</p>
                 <p>{t('legal.termsOfService.addressLabel')}: {t('legal.termsOfService.addressText')}</p>
-                <p>{t('legal.termsOfService.emailLabel')}: <a href="mailto:talkto.kalamitra@gmail.com" className="text-[var(--heritage-red)] hover:underline">talkto.kalamitra@gmail.com</a></p>
+                <p>{t('legal.termsOfService.emailLabel')}: <a href="mailto:contact@artisync.com" className="text-[var(--heritage-red)] hover:underline">contact@artisync.com</a></p>
               </div>
             </div>
           </section>

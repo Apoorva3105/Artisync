@@ -35,7 +35,7 @@ export default function PolicyPage() {
                 <p key={i}>{paragraph}</p>
               ))}
               <p className="bg-[var(--bg-1)] p-4 rounded-xl border border-[var(--heritage-gold)]/20 inline-block">
-                For any privacy-related queries, contact: <a href="mailto:talkto.kalamitra@gmail.com" className="text-[var(--heritage-red)] font-bold hover:underline">talkto.kalamitra@gmail.com</a>
+                For any privacy-related queries, contact: <a href="mailto:contact@artisync.com" className="text-[var(--heritage-red)] font-bold hover:underline">contact@artisync.com</a>
               </p>
             </div>
           </section>

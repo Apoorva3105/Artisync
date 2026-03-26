@@ -31,7 +31,7 @@ export default function CookiesPolicyPage() {
           <div className="bg-[var(--bg-1)] p-6 rounded-2xl mt-8 border border-[var(--heritage-gold)]/10">
             <h3 className="text-lg font-bold text-[var(--heritage-brown)] mb-2">{t('legal.cookiePolicy.questionsTitle')}</h3>
             <p className="text-[var(--muted)]">
-              {t('legal.cookiePolicy.contactText')} <a href="mailto:talkto.kalamitra@gmail.com" className="text-[var(--heritage-red)] font-medium hover:underline">talkto.kalamitra@gmail.com</a>
+              {t('legal.cookiePolicy.contactText')} <a href="mailto:contact@artisync.com" className="text-[var(--heritage-red)] font-medium hover:underline">contact@artisync.com</a>
             </p>
           </div>
         </div>
